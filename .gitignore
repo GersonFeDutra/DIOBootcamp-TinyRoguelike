@@ -12,5 +12,8 @@ data_*/
 *.aseprite
 *.psd
 
+# IDE
+.vscode
+
 *.DS_Store
 *.tmp
