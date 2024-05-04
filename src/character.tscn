@@ -1,3 +1,7 @@
-[gd_scene format=3 uid="uid://cwvpp4exys4xl"]
+[gd_scene load_steps=2 format=3 uid="uid://cwvpp4exys4xl"]
+
+[ext_resource type="Script" path="res://src/character.gd" id="1_xklig"]
 
 [node name="Character" type="CharacterBody2D"]
+motion_mode = 1
+script = ExtResource("1_xklig")

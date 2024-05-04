@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bfjce0ocs1i8f"]
+
+[ext_resource type="PackedScene" uid="uid://cfdp10a5kk106" path="res://src/characters/playables/warrior.tscn" id="1_84s35"]
+[ext_resource type="PackedScene" uid="uid://c2l2ww2iyrrfh" path="res://src/characters/enemies/pawn.tscn" id="2_gkmmg"]
+
+[node name="World" type="Node2D"]
+y_sort_enabled = true
+
+[node name="Pawn" parent="." instance=ExtResource("2_gkmmg")]
+position = Vector2(280, 36)
+
+[node name="Player" parent="." instance=ExtResource("1_84s35")]
+unique_name_in_owner = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("../../Camera2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]

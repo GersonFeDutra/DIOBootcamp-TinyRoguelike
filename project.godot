@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Dio"
+run/main_scene="res://src/world.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 

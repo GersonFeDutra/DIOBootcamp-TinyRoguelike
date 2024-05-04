@@ -1,12 +1,10 @@
-extends CharacterBody2D
+extends "res://src/characters/playable.gd"
 
 ## How many frames are expected in a physics_process.
 ## Mostly used for delta calculations with lerp.
 const IDEAL_FPS = 60
 const DEAD_ZONE := .15
 
-const SPEED_MOD := 100.  ## 1mpx
-@export_range(.1, 1000.) var speed: float = 100. ## [mpx/s]
 @export_range(.001, 1.) var weight := .05  ## [fixed frames%]
 var _direction := Vector2.ZERO
 
