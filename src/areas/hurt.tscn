@@ -3,7 +3,6 @@
 [ext_resource type="Script" path="res://src/areas/hurt.gd" id="1_gml2i"]
 
 [node name="HurtArea" type="Area2D"]
-collision_layer = 0
+collision_mask = 0
+monitoring = false
 script = ExtResource("1_gml2i")
-
-[connection signal="area_entered" from="." to="." method="_on_hit"]

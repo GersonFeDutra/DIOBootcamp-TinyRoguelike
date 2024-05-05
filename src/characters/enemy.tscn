@@ -11,5 +11,5 @@ script = ExtResource("2_6jnbm")
 
 [node name="FXSpawner" type="Marker2D" parent="." index="1"]
 
-[connection signal="area_entered" from="HurtArea" to="." method="_hurt" unbinds=1]
 [connection signal="health_depleated" from="HurtArea" to="." method="_die"]
+[connection signal="hurted" from="HurtArea" to="." method="_on_hurted"]

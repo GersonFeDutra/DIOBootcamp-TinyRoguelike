@@ -1,14 +1,21 @@
 extends "res://src/character.gd"
 
-const DYING_FX := preload("res://src/fx/dying.tscn")
+const DyingFx := preload("res://src/fx/dying.gd")
+const DyingFxScn := preload("res://src/fx/dying.tscn")
+
 
 func _die() -> void:
-	var fx := DYING_FX.instantiate()
-	fx.global_position = $FXSpawner.global_position
-	get_parent().add_child(fx)
+	get_parent().add_child(_create_dying_fx())
 	queue_free()
 
 
+func _create_dying_fx() -> DyingFx:
+	var fx := DyingFxScn.instantiate()
+	fx.global_position = $FXSpawner.global_position
+	fx.flip_h = flip_h
+	return fx
+
+
 # @Virtual
-func _hurt() -> void:
+func _on_hurted(_damage: int) -> void:
 	pass

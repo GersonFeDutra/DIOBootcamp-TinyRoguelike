@@ -1,8 +1,8 @@
 extends Area2D
 
 signal health_depleated
+signal hurted(int)
 
-const HitArea := preload("res://src/areas/hit.gd")
 @export var health_max: int = 3
 var health: int = health_max:
 	set(value):
@@ -13,8 +13,6 @@ var health: int = health_max:
 			health_depleated.emit()
 
 
-func _on_hit(area: Area2D) -> void:
-	var hit_box := area as HitArea
-	assert(hit_box != null, "collided area is not a hit area")
-	
-	self.health -= area.damage
+func take_damage(damage: int) -> void:
+	self.health -= damage
+	hurted.emit(damage)

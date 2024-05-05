@@ -3,6 +3,7 @@ extends "res://src/characters/enemy.gd"
 const Playable := preload("res://src/characters/playable.gd")
 @export var target: Playable
 @onready var sprite := $AnimatedSprite2D
+@onready var animation_player := $AnimationPlayer
 
 
 func _ready() -> void:
@@ -25,8 +26,8 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
-func _turn_to(target_position: Vector2) -> void:
-	sprite.flip_h = target_position.x < global_position.x
+func _flip(to_left: bool) -> void:
+	sprite.flip_h = to_left
 
 
 func _jutsu(target_position: Vector2, delta: float) -> Vector2:
@@ -44,5 +45,5 @@ func _follow(target_position: Vector2, delta: float) -> Vector2:
 	return desired_velocity
 
 
-func _hurt() -> void:
-	$AnimationPlayer.play("hurt")
+func _on_hurted(_damage: int) -> void:
+	animation_player.play("hurt")
