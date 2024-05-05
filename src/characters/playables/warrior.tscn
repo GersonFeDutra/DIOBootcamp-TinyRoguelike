@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://cfdp10a5kk106"]
+[gd_scene load_steps=67 format=3 uid="uid://cfdp10a5kk106"]
 
 [ext_resource type="PackedScene" uid="uid://v7sstw2wevwl" path="res://src/characters/playable.tscn" id="1_cam16"]
 [ext_resource type="Texture2D" uid="uid://dlc3rt0kpkwek" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="2_d0c73"]
@@ -857,6 +857,42 @@ _data = {
 "run": SubResource("Animation_btrfi")
 }
 
+[sub_resource type="Animation" id="Animation_4f7kl"]
+resource_name = "hurt"
+length = 0.55
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.55),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"next_state"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j7s8w"]
+_data = {
+"hurt": SubResource("Animation_4f7kl")
+}
+
 [node name="Warrior" instance=ExtResource("1_cam16")]
 script = ExtResource("2_kaqtd")
 weight = 0.15
@@ -880,11 +916,14 @@ debug_color = Color(0.997427, 0, 0.166181, 0.42)
 position = Vector2(0, -28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" index="0"]
-position = Vector2(45, -16)
-rotation = -0.378736
+position = Vector2(11, 36)
+rotation = 1.93357
 shape = SubResource("CapsuleShape2D_u8ijh")
 disabled = true
 debug_color = Color(0.685279, 0.293368, 1, 0.42)
+
+[node name="FXSpawner" parent="." index="4"]
+position = Vector2(0, -28)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
@@ -892,6 +931,11 @@ libraries = {
 }
 autoplay = "RESET"
 
-[node name="StateMachine" type="Node" parent="." index="6" node_paths=PackedStringArray("animation_player")]
+[node name="FxAnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_j7s8w")
+}
+
+[node name="StateMachine" type="Node" parent="." index="7" node_paths=PackedStringArray("animation_player")]
 script = ExtResource("4_5gmek")
 animation_player = NodePath("../AnimationPlayer")

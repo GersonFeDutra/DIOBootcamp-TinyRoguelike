@@ -9,7 +9,8 @@ const DEAD_ZONE := .15
 var _direction := Vector2.ZERO
 
 @onready var sprite := $AnimatedSprite2D
-@onready var animation_player := $AnimationPlayer
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var fx: AnimationPlayer = $FxAnimationPlayer
 @onready var state_machine := $StateMachine
 @onready var hit_area := $HitArea
 
@@ -35,6 +36,10 @@ func _input(event: InputEvent) -> void:
 func _flip(to_left: bool) -> void:
 	sprite.flip_h = to_left
 	hit_area.scale.x = -1 if to_left else 1
+
+
+func _on_hurted(_damage: int) -> void:
+	fx.play(&"hurt")
 
 
 func _physics_process(delta: float) -> void:

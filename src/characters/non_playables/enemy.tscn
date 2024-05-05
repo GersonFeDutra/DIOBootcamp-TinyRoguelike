@@ -132,14 +132,14 @@ _data = {
 "run": SubResource("Animation_n7n31")
 }
 
-[node name="Enemy" instance=ExtResource("1_64tqc")]
+[node name="Enemy" groups=["enemies"] instance=ExtResource("1_64tqc")]
 script = ExtResource("2_eybld")
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -26)
 animation = &""
 
-[node name="TargetArea" type="Area2D" parent="." index="2"]
+[node name="TargetArea" type="Area2D" parent="." index="1"]
 position = Vector2(0, -28)
 collision_layer = 0
 collision_mask = 2
@@ -148,10 +148,6 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TargetArea" index="0"]
 shape = SubResource("CircleShape2D_r6oqe")
 debug_color = Color(0.717647, 0.254902, 1, 0.0980392)
-
-[node name="HitArea" parent="." index="3"]
-collision_layer = 1
-collision_mask = 0
 
 [node name="FXSpawner" parent="." index="4"]
 position = Vector2(0, -27)

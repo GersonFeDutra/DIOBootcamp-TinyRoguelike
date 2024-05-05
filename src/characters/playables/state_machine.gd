@@ -1,3 +1,4 @@
+# TODO -> use state machine on all characters
 extends Node
 
 enum States { IDLE = 0, RUNNING = 1, ATTACKING = 2 }

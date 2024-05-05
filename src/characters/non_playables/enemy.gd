@@ -3,7 +3,9 @@ extends "res://src/characters/non_playable.gd"
 const Playable := preload("res://src/characters/playable.gd")
 @export var target: Playable
 
-enum EnemyStates { ATTACKING = 2, HURTING = 3, }
+enum EnemyStates {
+	ATTACKING = 2, HURTING = 3,
+}
 
 @onready var target_area: Area2D = $TargetArea
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -38,6 +40,14 @@ func next_state() -> void:
 
 func _has_target() -> bool:
 	return target != null
+
+
+func clear_target() -> void:
+	set_physics_process(false)
+	await get_tree().process_frame
+	target = null
+	_play_idle()
+	state = NpcStates.IDLE
 
 
 func _physics_process(delta: float) -> void:

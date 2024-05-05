@@ -66,8 +66,6 @@ radius = 29.0
 [node name="MeatSpawn" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_0ytis")
 autoplay = "default"
-frame = 6
-frame_progress = 1.0
 script = ExtResource("2_rntn1")
 
 [node name="Area2D" type="Area2D" parent="."]
