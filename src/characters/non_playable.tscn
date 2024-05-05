@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ilgptyex1bh"]
+
+[ext_resource type="PackedScene" uid="uid://cwvpp4exys4xl" path="res://src/character.tscn" id="1_5ebtx"]
+[ext_resource type="Script" path="res://src/characters/non_playable.gd" id="2_22mx2"]
+
+[node name="NPC" instance=ExtResource("1_5ebtx")]
+script = ExtResource("2_22mx2")
+state_change_delay = 0.2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+
+[node name="HitArea" parent="." index="2"]
+collision_mask = 2

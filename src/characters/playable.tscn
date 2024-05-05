@@ -6,3 +6,6 @@
 [node name="PlayableCharacter" instance=ExtResource("1_grxo7")]
 collision_layer = 3
 script = ExtResource("2_fnvx6")
+
+[node name="HurtArea" parent="." index="0"]
+collision_layer = 2

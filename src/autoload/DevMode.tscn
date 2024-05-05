@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://g76i1qcpni1b"]
+
+[ext_resource type="Script" path="res://src/autoload/dev_mode.gd" id="1_3oscy"]
+
+[node name="DevMode" type="Node"]
+script = ExtResource("1_3oscy")

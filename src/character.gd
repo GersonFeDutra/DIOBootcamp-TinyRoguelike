@@ -10,10 +10,19 @@ var flip_h: bool:
 		flip_h = value
 
 
+func _flip(_to_left: bool) -> void:
+	pass
+
+
 func _turn_to(target_position: Vector2) -> void:
 	self.flip_h = target_position.x < global_position.x
 
 
+func _die() -> void:
+	$FXSpawner.spawn(get_parent(), flip_h)
+	queue_free()
+
+
 # @Virtual
-func _flip(_to_left: bool) -> void:
+func _on_hurted(_damage: int) -> void:
 	pass

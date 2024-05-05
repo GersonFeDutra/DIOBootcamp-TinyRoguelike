@@ -14,6 +14,11 @@ config/name="Dio"
 run/main_scene="res://src/world.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
+run/ignore_damage=false
+
+[autoload]
+
+DevMode="*res://src/autoload/DevMode.tscn"
 
 [file_customization]
 

@@ -1,7 +1,6 @@
-[gd_scene load_steps=26 format=3 uid="uid://kbkdnnh7bxm2"]
+[gd_scene load_steps=25 format=3 uid="uid://kbkdnnh7bxm2"]
 
-[ext_resource type="PackedScene" uid="uid://ilgptyex1bh" path="res://src/characters/enemy.tscn" id="1_h1hyk"]
-[ext_resource type="Script" path="res://src/characters/enemies/pawn.gd" id="2_3xof0"]
+[ext_resource type="PackedScene" uid="uid://ilgptyex1bh" path="res://src/characters/non_playable.tscn" id="1_h1hyk"]
 [ext_resource type="Texture2D" uid="uid://bsvo6c0bgpqyp" path="res://addons/Tiny Swords/Resources/Sheep/HappySheep_Idle.png" id="3_6vxvc"]
 [ext_resource type="Texture2D" uid="uid://cfew0rf2hfv64" path="res://addons/Tiny Swords/Resources/Sheep/HappySheep_Bouncing.png" id="4_i3cbq"]
 [ext_resource type="PackedScene" uid="uid://d18u5npqe51a8" path="res://src/fx/meat_spawn.tscn" id="5_eflh1"]
@@ -187,10 +186,8 @@ _data = {
 }
 
 [node name="Sheep" instance=ExtResource("1_h1hyk")]
-script = ExtResource("2_3xof0")
-speed = 200.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -26)
 sprite_frames = SubResource("SpriteFrames_55d5k")
 animation = &"run"
@@ -201,7 +198,7 @@ frame_progress = 0.137288
 position = Vector2(0, -24)
 shape = SubResource("CapsuleShape2D_0fdh1")
 
-[node name="HurtArea" parent="." index="2"]
+[node name="HurtArea" parent="." index="3"]
 health_max = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea" index="0"]
@@ -209,11 +206,16 @@ position = Vector2(0, -26.5)
 shape = SubResource("RectangleShape2D_fdogm")
 debug_color = Color(0.981419, 0, 0.371227, 0.42)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
+[node name="HitArea" parent="." index="4"]
+collision_layer = 1
+collision_mask = 0
+monitoring = false
+
+[node name="FXSpawner" parent="." index="5"]
+position = Vector2(0, -27)
+fx = ExtResource("5_eflh1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_rxurk")
 }
-
-[node name="FXSpawner" parent="." index="4"]
-position = Vector2(0, -27)
-fx = ExtResource("5_eflh1")
