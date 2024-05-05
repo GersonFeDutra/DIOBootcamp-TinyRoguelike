@@ -1,0 +1,84 @@
+[gd_scene load_steps=12 format=3 uid="uid://d18u5npqe51a8"]
+
+[ext_resource type="Texture2D" uid="uid://bv68q2vd6myy1" path="res://addons/Tiny Swords/Resources/Resources/M_Spawn.png" id="1_mkd71"]
+[ext_resource type="Script" path="res://src/fx/meat_spawn.gd" id="2_rntn1"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dt25k"]
+atlas = ExtResource("1_mkd71")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n2hlx"]
+atlas = ExtResource("1_mkd71")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jehh"]
+atlas = ExtResource("1_mkd71")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qouhf"]
+atlas = ExtResource("1_mkd71")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iioks"]
+atlas = ExtResource("1_mkd71")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64ouw"]
+atlas = ExtResource("1_mkd71")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jx40"]
+atlas = ExtResource("1_mkd71")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0ytis"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dt25k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n2hlx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jehh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qouhf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iioks")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64ouw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jx40")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iljve"]
+radius = 29.0
+
+[node name="MeatSpawn" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_0ytis")
+autoplay = "default"
+frame = 6
+frame_progress = 1.0
+script = ExtResource("2_rntn1")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 13)
+shape = SubResource("CircleShape2D_iljve")
+debug_color = Color(0.510293, 0.577911, 7.70092e-07, 0.42)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

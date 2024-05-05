@@ -4,7 +4,7 @@ signal health_depleated
 signal hurted(int)
 
 @export var health_max: int = 3
-var health: int = health_max:
+@onready var health: int = health_max:
 	set(value):
 		var old_health = health
 		health = value

@@ -112,6 +112,8 @@ animations = [{
 [node name="Dying" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_0ytis")
 autoplay = "default"
+frame = 6
+frame_progress = 0.269066
 script = ExtResource("2_mvrew")
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

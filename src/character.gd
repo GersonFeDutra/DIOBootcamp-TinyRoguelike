@@ -15,5 +15,5 @@ func _turn_to(target_position: Vector2) -> void:
 
 
 # @Virtual
-func _flip(to_left: bool) -> void:
+func _flip(_to_left: bool) -> void:
 	pass
