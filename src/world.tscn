@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bfjce0ocs1i8f"]
+[gd_scene load_steps=5 format=3 uid="uid://bfjce0ocs1i8f"]
 
 [ext_resource type="PackedScene" uid="uid://cfdp10a5kk106" path="res://src/characters/playables/warrior.tscn" id="1_84s35"]
 [ext_resource type="PackedScene" uid="uid://c2l2ww2iyrrfh" path="res://src/characters/enemies/pawn.tscn" id="2_gkmmg"]
 [ext_resource type="PackedScene" uid="uid://kbkdnnh7bxm2" path="res://src/characters/enemies/sheep.tscn" id="3_krdo6"]
+[ext_resource type="PackedScene" uid="uid://vco3ulchj5yd" path="res://src/characters/enemies/torch_goblin.tscn" id="4_hfa43"]
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -20,3 +21,6 @@ remote_path = NodePath("../../Camera2D")
 
 [node name="Sheep" parent="." instance=ExtResource("3_krdo6")]
 position = Vector2(-226, -27)
+
+[node name="TorchGoblin" parent="." instance=ExtResource("4_hfa43")]
+position = Vector2(0, 204)

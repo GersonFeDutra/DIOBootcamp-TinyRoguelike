@@ -188,6 +188,7 @@ _data = {
 
 [node name="Sheep" instance=ExtResource("1_h1hyk")]
 script = ExtResource("2_3xof0")
+speed = 200.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -26)
