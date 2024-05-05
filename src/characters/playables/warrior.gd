@@ -11,14 +11,17 @@ var _direction := Vector2.ZERO
 @onready var sprite := $AnimatedSprite2D
 @onready var animation_player := $AnimationPlayer
 @onready var state_machine := $StateMachine
+@onready var hit_area := $HitArea
 
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"move_left"):
 		sprite.flip_h = true
+		hit_area.scale.x = -1
 	
 	if event.is_action_pressed(&"move_right"):
 		sprite.flip_h = false
+		hit_area.scale.x = 1
 	
 	if event.is_action_pressed(&"attack"):
 		state_machine.change_state(

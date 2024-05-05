@@ -42,3 +42,7 @@ func _follow(target_position: Vector2, delta: float) -> Vector2:
 			global_position.direction_to(target_position) \
 			* speed * SPEED_MOD * delta
 	return desired_velocity
+
+
+func _hurt() -> void:
+	$AnimationPlayer.play("hurt")
