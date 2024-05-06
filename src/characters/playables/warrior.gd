@@ -5,8 +5,11 @@ extends "res://src/characters/playable.gd"
 const IDEAL_FPS = 60
 const DEAD_ZONE := .15
 
+enum States { IDLE = 0, RUNNING = 1, ATTACKING = 2 }
+
 @export_range(.001, 1.) var weight := .05  ## [fixed frames%]
 var _direction := Vector2.ZERO
+var _is_sword_left: bool
 
 @onready var sprite := $AnimatedSprite2D
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -28,9 +31,9 @@ func _input(event: InputEvent) -> void:
 		self.flip_h = false
 	
 	if event.is_action_pressed(&"attack"):
-		state_machine.change_state(
-				state_machine.States.ATTACKING,
-				_direction)
+		state_machine.change_state_from(
+				States.ATTACKING + int(_is_sword_left), _direction)
+		_is_sword_left = not _is_sword_left
 
 
 func _flip(to_left: bool) -> void:
@@ -44,9 +47,9 @@ func _on_hurted(_damage: int) -> void:
 
 func _physics_process(delta: float) -> void:
 	var axis := Input.get_vector(
-		&"move_left", &"move_right",
-		&"move_up", &"move_down",
-		DEAD_ZONE)
+			&"move_left", &"move_right",
+			&"move_up", &"move_down",
+			DEAD_ZONE)
 	velocity = _change_to(axis, delta)
 	_direction = axis.sign()
 	
@@ -58,9 +61,9 @@ func _physics_process(delta: float) -> void:
 func _change_to(axis: Vector2, delta: float) -> Vector2:
 	var target_velocity: Vector2
 	if axis:
-		state_machine.change_state(state_machine.States.RUNNING)
+		state_machine.change_state_from(States.RUNNING)
 		target_velocity = axis * speed * SPEED_MOD * delta
 	else:
-		state_machine.change_state(state_machine.States.IDLE)
+		state_machine.change_state_from(States.IDLE)
 		target_velocity = Vector2.ZERO
 	return lerp(velocity, target_velocity, weight * delta * IDEAL_FPS)
