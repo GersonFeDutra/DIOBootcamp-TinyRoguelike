@@ -1,12 +1,19 @@
+@tool
 extends "res://src/characters/non_playables/enemy.gd"
 
 enum Weapon { HAMMER, AXE }
-@export var weapon: Weapon
+var weapon_to_state := {
+	Weapon.HAMMER: preload("res://assets/states/atk_hammer.tres"),
+	Weapon.AXE: preload("res://assets/states/atk_axe.tres"),
+}
+@export var weapon: Weapon:
+	set(value):
+		weapon = value
+		
+		if Engine.is_editor_hint():
+			_switch_attack_animation(value)
 
 
-func _play_attack() -> void:
-	const WEAPON_TO_ANIM := {
-		Weapon.HAMMER: &"pawn/atk_hammer",
-		Weapon.AXE: &"pawn/atk_axe",
-	}
-	animation_player.play(WEAPON_TO_ANIM[weapon])
+func _switch_attack_animation(to: Weapon) -> void:
+	state_machine.states[behavior.ChaseStates.ATTACKING] = \
+			weapon_to_state[to]

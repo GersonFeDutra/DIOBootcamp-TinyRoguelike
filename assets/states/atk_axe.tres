@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="State" load_steps=2 format=3 uid="uid://jsyqquoysdip"]
+
+[ext_resource type="Script" path="res://src/state_machine/state.gd" id="1_1ns47"]
+
+[resource]
+script = ExtResource("1_1ns47")
+transition = 0
+animation = &"atk_axe"
+is_movement_allowed = false
+use_blend_space = false

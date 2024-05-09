@@ -23,6 +23,7 @@ func _die() -> void:
 	queue_free()
 
 
+# TODO -> Transfer this to a connection with a BehaviorManager
 # @Virtual
 func _on_hurted(_damage: int) -> void:
 	pass

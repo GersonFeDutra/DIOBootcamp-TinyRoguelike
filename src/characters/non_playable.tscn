@@ -1,13 +1,34 @@
-[gd_scene load_steps=3 format=3 uid="uid://ilgptyex1bh"]
+[gd_scene load_steps=7 format=3 uid="uid://ilgptyex1bh"]
 
 [ext_resource type="PackedScene" uid="uid://cwvpp4exys4xl" path="res://src/character.tscn" id="1_5ebtx"]
 [ext_resource type="Script" path="res://src/characters/non_playable.gd" id="2_22mx2"]
+[ext_resource type="PackedScene" uid="uid://bnhpxs1mwgaeo" path="res://src/state_machine.tscn" id="3_jn3k2"]
+[ext_resource type="Script" path="res://src/state_machine/state.gd" id="4_4k24o"]
+
+[sub_resource type="Resource" id="Resource_efrm0"]
+script = ExtResource("4_4k24o")
+transition = 0
+animation = &"idle"
+is_movement_allowed = true
+use_blend_space = false
+
+[sub_resource type="Resource" id="Resource_7d5a8"]
+script = ExtResource("4_4k24o")
+transition = 0
+animation = &"run"
+is_movement_allowed = true
+use_blend_space = false
 
 [node name="NPC" instance=ExtResource("1_5ebtx")]
 script = ExtResource("2_22mx2")
-state_change_delay = 0.2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 
 [node name="HitArea" parent="." index="2"]
 collision_mask = 2
+
+[node name="StateMachine" parent="." index="4" instance=ExtResource("3_jn3k2")]
+states = {
+0: SubResource("Resource_efrm0"),
+1: SubResource("Resource_7d5a8")
+}

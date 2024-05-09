@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://d06rv7qxddxsc"]
+
+[ext_resource type="PackedScene" uid="uid://bnhpxs1mwgaeo" path="res://src/state_machine.tscn" id="1_o4ryt"]
+[ext_resource type="Script" path="res://src/state_machine/progressive.gd" id="2_pm56a"]
+
+[node name="ProgressiveStateMachine" instance=ExtResource("1_o4ryt")]
+script = ExtResource("2_pm56a")

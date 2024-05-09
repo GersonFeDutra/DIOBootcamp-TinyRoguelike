@@ -1,7 +1,7 @@
 extends Area2D
 
 signal health_depleated
-signal hurted(int)
+signal hurted(damage: int)
 
 @export var health_max: int = 3
 @onready var health: int = health_max:

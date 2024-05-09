@@ -1,8 +1,10 @@
-[gd_scene load_steps=41 format=3 uid="uid://denn0gdxcl2ng"]
+[gd_scene load_steps=56 format=3 uid="uid://denn0gdxcl2ng"]
 
 [ext_resource type="PackedScene" uid="uid://c2l2ww2iyrrfh" path="res://src/characters/non_playables/enemy.tscn" id="1_28mpw"]
 [ext_resource type="Texture2D" uid="uid://dlrfs585dytlw" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="2_5uk3o"]
 [ext_resource type="Script" path="res://src/characters/non_playables/enemies/pawn.gd" id="2_pdhvd"]
+[ext_resource type="Script" path="res://src/state_machine/state.gd" id="4_3nryn"]
+[ext_resource type="Resource" uid="uid://jsyqquoysdip" path="res://assets/states/atk_axe.tres" id="5_asxld"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23w5y"]
 atlas = ExtResource("2_5uk3o")
@@ -206,21 +208,41 @@ size = Vector2(42, 43)
 radius = 17.4975
 height = 112.488
 
+[sub_resource type="Resource" id="Resource_y3y22"]
+script = ExtResource("4_3nryn")
+transition = 0
+animation = &"idle"
+is_movement_allowed = true
+use_blend_space = false
+
+[sub_resource type="Resource" id="Resource_7d5a8"]
+script = ExtResource("4_3nryn")
+transition = 0
+animation = &"run"
+is_movement_allowed = true
+use_blend_space = false
+
+[sub_resource type="Resource" id="Resource_yox6l"]
+script = ExtResource("4_3nryn")
+transition = 1
+animation = &"hurt"
+is_movement_allowed = false
+use_blend_space = false
+
 [sub_resource type="Animation" id="Animation_g82rg"]
 resource_name = "RESET"
 length = 0.001
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/path = NodePath("AnimatedSprite2D:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"idle"]
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -237,14 +259,38 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:modulate")
+tracks/2/path = NodePath("AnimatedSprite2D:animation")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
+"update": 1,
+"values": [&"idle"]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HitArea/HammerCollision:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_kjn05"]
@@ -348,7 +394,7 @@ tracks/1/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cid0r"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w8fbg"]
 _data = {
 "RESET": SubResource("Animation_g82rg"),
 "hurt": SubResource("Animation_kjn05"),
@@ -356,48 +402,7 @@ _data = {
 "run": SubResource("Animation_n7n31")
 }
 
-[sub_resource type="Animation" id="Animation_xgi2k"]
-resource_name = "RESET"
-length = 0.6
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimatedSprite2D:animation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [&"idle"]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimatedSprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimatedSprite2D:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_2dnib"]
+[sub_resource type="Animation" id="Animation_wtwao"]
 resource_name = "atk_axe"
 length = 0.6
 loop_mode = 1
@@ -425,21 +430,35 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HitArea/CollisionShape2D:disabled")
+tracks/2/path = NodePath("ChaseBehavior")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"next_state"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitArea/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
 
-[sub_resource type="Animation" id="Animation_kfnqg"]
-resource_name = "atk_hammer"
+[sub_resource type="Animation" id="Animation_llyxl"]
+resource_name = "atk"
 length = 0.6
 loop_mode = 1
 tracks/0/type = "value"
@@ -466,33 +485,95 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("HitArea/HammerCollision:disabled")
+tracks/2/path = NodePath("ChaseBehavior")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"next_state"
+}]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HitArea/HammerCollision:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_usvt5"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yv7o0"]
 _data = {
-"RESET": SubResource("Animation_xgi2k"),
-"atk_axe": SubResource("Animation_2dnib"),
-"atk_hammer": SubResource("Animation_kfnqg")
+"atk_axe": SubResource("Animation_wtwao"),
+"atk_hammer": SubResource("Animation_llyxl")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_it688"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_17jln"]
+animation = &"pawn/atk_axe"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_il44a"]
+animation = &"pawn/atk_hammer"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bq72i"]
+animation = &"hurt"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gpnwp"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_jvh18"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_he3vd"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_p22ph"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mwccd"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bpdsm"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_60cuu"]
+states/RESET/node = SubResource("AnimationNodeAnimation_it688")
+states/RESET/position = Vector2(332, 100)
+states/Start/position = Vector2(101, 100)
+states/atk_axe/node = SubResource("AnimationNodeAnimation_17jln")
+states/atk_axe/position = Vector2(273, 179)
+states/atk_hammer/node = SubResource("AnimationNodeAnimation_il44a")
+states/atk_hammer/position = Vector2(421, 179)
+states/hurt/node = SubResource("AnimationNodeAnimation_bq72i")
+states/hurt/position = Vector2(332, 27)
+states/idle/node = SubResource("AnimationNodeAnimation_gpnwp")
+states/idle/position = Vector2(210, 100)
+states/run/node = SubResource("AnimationNodeAnimation_jvh18")
+states/run/position = Vector2(545, 100)
+transitions = ["hurt", "RESET", SubResource("AnimationNodeStateMachineTransition_he3vd"), "atk_axe", "RESET", SubResource("AnimationNodeStateMachineTransition_p22ph"), "atk_hammer", "RESET", SubResource("AnimationNodeStateMachineTransition_mwccd"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_bpdsm")]
+graph_offset = Vector2(-46.015, -14)
 
 [node name="Pawn" instance=ExtResource("1_28mpw")]
 script = ExtResource("2_pdhvd")
-weapon = 0
+weapon = 1
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_son6n")
-animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 position = Vector2(0, -24)
@@ -505,6 +586,7 @@ debug_color = Color(0.981419, 0, 0.371227, 0.42)
 
 [node name="HammerCollision" type="CollisionPolygon2D" parent="HitArea" index="0"]
 polygon = PackedVector2Array(66, 6, 41, -78, 0, -69, 16, 6)
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" index="1"]
 position = Vector2(12.75, -14.5)
@@ -513,9 +595,25 @@ shape = SubResource("CapsuleShape2D_r500m")
 disabled = true
 debug_color = Color(0.998824, 0.0271898, 0, 0.42)
 
-[node name="AnimationPlayer" parent="." index="6"]
-libraries = {
-"": SubResource("AnimationLibrary_cid0r"),
-"pawn": SubResource("AnimationLibrary_usvt5")
+[node name="StateMachine" parent="." index="6"]
+states = {
+0: SubResource("Resource_y3y22"),
+1: SubResource("Resource_7d5a8"),
+2: ExtResource("5_asxld"),
+3: SubResource("Resource_yox6l")
 }
-autoplay = "pawn/RESET"
+current_state = SubResource("Resource_y3y22")
+
+[node name="AnimationPlayer" parent="StateMachine" index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_w8fbg"),
+"pawn": SubResource("AnimationLibrary_yv7o0")
+}
+
+[node name="AnimationTree" parent="StateMachine" index="1"]
+tree_root = SubResource("AnimationNodeStateMachine_60cuu")
+
+[node name="ChaseBehavior" parent="." index="7"]
+delay = 0.5
+
+[connection signal="hurted" from="HurtArea" to="ChaseBehavior" method="_on_hurted"]

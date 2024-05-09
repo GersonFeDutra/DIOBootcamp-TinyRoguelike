@@ -9,3 +9,4 @@ script = ExtResource("2_fnvx6")
 
 [node name="HurtArea" parent="." index="0"]
 collision_layer = 2
+health_max = 6

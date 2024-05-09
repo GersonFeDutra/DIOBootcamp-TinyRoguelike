@@ -1,5 +1,6 @@
 @tool
 @icon("res://assets/state_machine_icon.svg")
+class_name StateMachine
 ## Generic current_state machine for 2D characters behavior.
 ## Using the strategy pattern: [State] as [Resource].
 extends Node
@@ -18,6 +19,7 @@ extends Node
 		update_configuration_warnings()
 var _next: State
 var _next_direction: Vector2
+var is_animation_finished: bool
 
 
 func _ready() -> void:
@@ -57,9 +59,12 @@ func attach_waiting_states() -> void:
 
 func trigger_next_state() -> void:
 	if _next:
+		is_animation_finished = false
 		current_state = _next
 		_next.trigger(animation_tree, _next_direction)
 		_next = null
+	else:
+		is_animation_finished = true
 
 
 func change_state_from(key, direction := Vector2.ZERO) -> void:
@@ -71,13 +76,21 @@ func change_state(to: State, direction := Vector2.ZERO) -> bool:
 		return false
 	match current_state.transition:
 		State.TransitionMode.IMMEDIATE:
-			self.current_state = to
-			current_state.trigger(animation_tree, direction)
+			_set_current_state(to, direction)
 			return true
 		State.TransitionMode.WAIT_FINISH:
-			_next = to
-			return false
+			if is_animation_finished:
+				_set_current_state(to, direction)
+				return true
+			else:
+				_next = to
+				return false
 	return false
+
+
+func _set_current_state(to: State, direction: Vector2) -> void:
+	self.current_state = to
+	current_state.trigger(animation_tree, direction)
 
 
 func is_movement_allowed() -> bool:
