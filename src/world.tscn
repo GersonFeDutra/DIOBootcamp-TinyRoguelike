@@ -1,12 +1,63 @@
-[gd_scene load_steps=5 format=3 uid="uid://bfjce0ocs1i8f"]
+[gd_scene load_steps=14 format=3 uid="uid://bfjce0ocs1i8f"]
 
 [ext_resource type="PackedScene" uid="uid://cfdp10a5kk106" path="res://src/characters/playables/warrior.tscn" id="1_84s35"]
 [ext_resource type="PackedScene" uid="uid://denn0gdxcl2ng" path="res://src/characters/non_playables/enemies/pawn.tscn" id="2_8bxid"]
 [ext_resource type="PackedScene" uid="uid://kbkdnnh7bxm2" path="res://src/characters/non_playables/sheep.tscn" id="3_krdo6"]
 [ext_resource type="PackedScene" uid="uid://tt1hjgdlyxvb" path="res://src/characters/non_playables/enemies/torch_goblin.tscn" id="4_hfa43"]
+[ext_resource type="Script" path="res://src/lib/spawner.gd" id="5_4rdey"]
+[ext_resource type="Script" path="res://src/lib/spawn.gd" id="6_ysobt"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uy7y4"]
+normal = Vector2(1, 0)
+distance = -4.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_skcbl"]
+normal = Vector2(-1, 0)
+distance = -4.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_p2myu"]
+distance = -4.0
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_655ra"]
+normal = Vector2(0, 1)
+distance = -4.0
+
+[sub_resource type="Resource" id="Resource_wle7l"]
+script = ExtResource("6_ysobt")
+scene = ExtResource("2_8bxid")
+random_weight = 0.7
+
+[sub_resource type="Resource" id="Resource_yvadc"]
+script = ExtResource("6_ysobt")
+scene = ExtResource("4_hfa43")
+random_weight = 0.3
+
+[sub_resource type="Curve2D" id="Curve2D_m1uqn"]
+_data = {
+"points": PackedVector2Array(-1044.97, 4.41897, 1044.97, -4.41897, 3, -634, 967.265, 12.1026, -967.265, -12.1026, 0, 652, -970.48, -3.96044, 970.48, 3.96044, 9, -631)
+}
+point_count = 3
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
+
+[node name="Walls" type="StaticBody2D" parent="."]
+
+[node name="Left" type="CollisionShape2D" parent="Walls"]
+position = Vector2(-576, 0)
+shape = SubResource("WorldBoundaryShape2D_uy7y4")
+
+[node name="Right" type="CollisionShape2D" parent="Walls"]
+position = Vector2(576, 0)
+shape = SubResource("WorldBoundaryShape2D_skcbl")
+
+[node name="Bottom" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, 356)
+shape = SubResource("WorldBoundaryShape2D_p2myu")
+
+[node name="Up" type="CollisionShape2D" parent="Walls"]
+position = Vector2(0, -356)
+shape = SubResource("WorldBoundaryShape2D_655ra")
 
 [node name="Player" parent="." instance=ExtResource("1_84s35")]
 unique_name_in_owner = true
@@ -15,6 +66,14 @@ unique_name_in_owner = true
 remote_path = NodePath("../../Camera2D")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+limit_left = -580
+limit_top = -360
+limit_right = 580
+limit_bottom = 360
+limit_smoothed = true
+position_smoothing_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
 
 [node name="NPCs" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -32,3 +91,17 @@ position = Vector2(0, 204)
 [node name="Pawn" parent="NPCs/Enemies" instance=ExtResource("2_8bxid")]
 position = Vector2(242, 4.38179e-29)
 velocity = Vector2(-166.667, -2.21711e-28)
+
+[node name="Spawner" type="Node2D" parent="NPCs" node_paths=PackedStringArray("path_follow")]
+y_sort_enabled = true
+script = ExtResource("5_4rdey")
+path_follow = NodePath("Path2D/PathFollow2D")
+spawns = Array[ExtResource("6_ysobt")]([SubResource("Resource_wle7l"), SubResource("Resource_yvadc")])
+frequency = 3.0
+
+[node name="Path2D" type="Path2D" parent="NPCs/Spawner"]
+curve = SubResource("Curve2D_m1uqn")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="NPCs/Spawner/Path2D"]
+position = Vector2(3, -634)
+rotation = -0.00422875

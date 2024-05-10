@@ -615,5 +615,3 @@ tree_root = SubResource("AnimationNodeStateMachine_60cuu")
 
 [node name="ChaseBehavior" parent="." index="7"]
 delay = 0.5
-
-[connection signal="hurted" from="HurtArea" to="ChaseBehavior" method="_on_hurted"]

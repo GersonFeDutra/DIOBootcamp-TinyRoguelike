@@ -6,10 +6,14 @@ extends "res://src/characters/non_playable.gd"
 func _ready() -> void:
 	set_physics_process(not Engine.is_editor_hint())
 	
-	var player_path := NodePath(&"%Player")
 	if not behavior.target:
-		if has_node(player_path):
-			behavior.target = get_node(player_path)
+		var playables: Array[Node] = get_tree().get_nodes_in_group("playable")
+		playables.shuffle()
+		
+		if playables.is_empty():
+			set_physics_process(false)
+		else:
+			behavior.target = playables[0]
 
 
 func _physics_process(delta: float) -> void:

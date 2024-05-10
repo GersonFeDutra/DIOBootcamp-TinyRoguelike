@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cwvpp4exys4xl" path="res://src/character.tscn" id="1_grxo7"]
 [ext_resource type="Script" path="res://src/characters/playable.gd" id="2_fnvx6"]
 
-[node name="PlayableCharacter" instance=ExtResource("1_grxo7")]
+[node name="PlayableCharacter" groups=["playable"] instance=ExtResource("1_grxo7")]
 collision_layer = 3
 script = ExtResource("2_fnvx6")
 
