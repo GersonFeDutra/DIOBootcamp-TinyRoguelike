@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhjnmvkkdrm0b"]
+[gd_scene load_steps=8 format=3 uid="uid://bbbetaxgak8sg"]
 
 [sub_resource type="SystemFont" id="SystemFont_e5myo"]
 font_names = PackedStringArray("Monospace")
@@ -14,10 +14,10 @@ font_weight = 999
 generate_mipmaps = true
 oversampling = 3.7
 
-[sub_resource type="LabelSettings" id="LabelSettings_2lhe8"]
+[sub_resource type="LabelSettings" id="LabelSettings_x7vvq"]
 font = SubResource("SystemFont_nr43r")
 font_size = 24
-font_color = Color(0.788235, 0.113725, 0.270588, 1)
+font_color = Color(0.1106, 0.79, 0.506917, 1)
 outline_size = 6
 outline_color = Color(0.19, 0.1577, 0.187847, 1)
 
@@ -70,9 +70,9 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.406126, 1),
+"transitions": PackedFloat32Array(1, 0.406126),
 "update": 0,
-"values": [Vector2(-36, 0), Vector2(-36, -31)]
+"values": [Vector2(-36, -31), Vector2(-36, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -93,10 +93,10 @@ tracks/2/path = NodePath(".:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 1),
-"transitions": PackedFloat32Array(0.5, 1.68179, 1),
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1.68179, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/3/type = "method"
 tracks/3/imported = false
@@ -119,7 +119,7 @@ _data = {
 "pop": SubResource("Animation_5qdvj")
 }
 
-[node name="DamagePop" type="Node2D"]
+[node name="HealPop" type="Node2D"]
 z_index = 100
 
 [node name="Label" type="Label" parent="."]
@@ -128,7 +128,7 @@ offset_top = -31.0
 offset_right = 37.0
 pivot_offset = Vector2(36, 31)
 text = "XXXX"
-label_settings = SubResource("LabelSettings_2lhe8")
+label_settings = SubResource("LabelSettings_x7vvq")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -137,4 +137,3 @@ libraries = {
 "": SubResource("AnimationLibrary_n1x0a")
 }
 autoplay = "pop"
-speed_scale = 1.5

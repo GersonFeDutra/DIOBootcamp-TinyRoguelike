@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlrfs585dytlw" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="2_5uk3o"]
 [ext_resource type="Script" path="res://src/characters/non_playables/enemies/pawn.gd" id="2_pdhvd"]
 [ext_resource type="Script" path="res://src/state_machine/state.gd" id="4_3nryn"]
-[ext_resource type="Script" path="res://src/fx/damage_spawner.gd" id="4_681nj"]
+[ext_resource type="Script" path="res://src/fx/pop_spawner.gd" id="4_681nj"]
 [ext_resource type="Resource" uid="uid://jsyqquoysdip" path="res://assets/states/atk_axe.tres" id="5_asxld"]
 [ext_resource type="PackedScene" uid="uid://bhjnmvkkdrm0b" path="res://src/fx/damage_pop.tscn" id="5_fpnvi"]
 

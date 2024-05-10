@@ -3,6 +3,8 @@ extends CharacterBody2D
 const SPEED_MOD := 100.  ## 1mpx
 @export_range(.1, 1000.) var speed: float = 100. ## [mpx/s]
 @onready var damage_fx_spawner := $DamageFxSpawner
+@onready var heal_fx_spawner := $HealFxSpawner
+@onready var hurt_area: Area2D = $HurtArea
 
 var flip_h: bool:
 	set(value):
@@ -27,3 +29,7 @@ func _die() -> void:
 # TODO -> Transfer this to a connection with a BehaviorManager
 func _on_hurted(damage: int) -> void:
 	damage_fx_spawner.spawn(get_parent(), damage)
+
+
+func _on_healed(amount: int) -> void:
+	heal_fx_spawner.spawn(get_parent(), amount)

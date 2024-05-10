@@ -1,6 +1,5 @@
 extends "res://src/character.gd"
 
-@onready var hurt_area := $HurtArea
 @onready var hit_area := $HitArea
 @onready var sprite := $AnimatedSprite2D
 @onready var state_machine := $StateMachine

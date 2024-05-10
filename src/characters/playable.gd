@@ -1,12 +1,12 @@
 extends "res://src/character.gd"
 
 const Enemy := preload("res://src/characters/non_playables/enemy.gd")
-var resources: int
+#var resources: int
 
 
 # TODO -> implement resource mechanic
 func add_resource(value: int = 1) -> void:
-	resources += value
+	hurt_area.heal(value)
 
 
 func _die() -> void:

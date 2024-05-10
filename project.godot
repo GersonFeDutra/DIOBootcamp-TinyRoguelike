@@ -14,12 +14,17 @@ config/name="Dio"
 run/main_scene="res://src/world.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
-run/ignore_damage=true
+run/ignore_damage=false
 run/time_scale=1.0
 
 [autoload]
 
 DevMode="*res://src/autoload/DevMode.tscn"
+
+[display]
+
+mouse_cursor/custom_image="res://addons/Tiny Swords/UI/Pointers/cursor.tres"
+mouse_cursor/custom_image_hotspot=Vector2(2, 2)
 
 [file_customization]
 
@@ -27,6 +32,7 @@ folder_colors={
 "res://src/areas/": "blue",
 "res://src/autoload/": "gray",
 "res://src/characters/": "yellow",
+"res://src/fx/": "purple",
 "res://src/lib/": "gray"
 }
 
