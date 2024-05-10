@@ -1,7 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bfjce0ocs1i8f"]
+[gd_scene load_steps=17 format=3 uid="uid://bfjce0ocs1i8f"]
 
 [ext_resource type="PackedScene" uid="uid://cfdp10a5kk106" path="res://src/characters/playables/warrior.tscn" id="1_84s35"]
+[ext_resource type="Script" path="res://src/vfx_camera.gd" id="2_6rmkd"]
 [ext_resource type="PackedScene" uid="uid://denn0gdxcl2ng" path="res://src/characters/non_playables/enemies/pawn.tscn" id="2_8bxid"]
+[ext_resource type="Script" path="res://src/fx/damage_spawner.gd" id="2_ttadw"]
+[ext_resource type="PackedScene" uid="uid://bhjnmvkkdrm0b" path="res://src/fx/damage_pop.tscn" id="3_fyqhq"]
 [ext_resource type="PackedScene" uid="uid://kbkdnnh7bxm2" path="res://src/characters/non_playables/sheep.tscn" id="3_krdo6"]
 [ext_resource type="PackedScene" uid="uid://tt1hjgdlyxvb" path="res://src/characters/non_playables/enemies/torch_goblin.tscn" id="4_hfa43"]
 [ext_resource type="Script" path="res://src/lib/spawner.gd" id="5_4rdey"]
@@ -62,6 +65,13 @@ shape = SubResource("WorldBoundaryShape2D_655ra")
 [node name="Player" parent="." instance=ExtResource("1_84s35")]
 unique_name_in_owner = true
 
+[node name="DamageFxSpawner" parent="Player" index="4"]
+script = ExtResource("2_ttadw")
+fx = ExtResource("3_fyqhq")
+
+[node name="DeathFxSpawner" parent="Player" index="5"]
+position = Vector2(0, 0)
+
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
@@ -74,6 +84,7 @@ limit_smoothed = true
 position_smoothing_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
+script = ExtResource("2_6rmkd")
 
 [node name="NPCs" type="Node2D" parent="."]
 y_sort_enabled = true
@@ -105,3 +116,7 @@ curve = SubResource("Curve2D_m1uqn")
 [node name="PathFollow2D" type="PathFollow2D" parent="NPCs/Spawner/Path2D"]
 position = Vector2(3, -634)
 rotation = -0.00422875
+
+[connection signal="hurted" from="Player/HurtArea" to="Camera2D" method="shake" unbinds=1]
+
+[editable path="Player"]

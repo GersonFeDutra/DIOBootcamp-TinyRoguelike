@@ -41,7 +41,8 @@ func _flip(to_left: bool) -> void:
 	hit_area.scale.x = -1 if to_left else 1
 
 
-func _on_hurted(_damage: int) -> void:
+func _on_hurted(damage: int) -> void:
+	super(damage)
 	fx.play(&"hurt")
 
 
@@ -67,3 +68,8 @@ func _change_to(axis: Vector2, delta: float) -> Vector2:
 		state_machine.change_state_from(States.IDLE)
 		target_velocity = Vector2.ZERO
 	return lerp(velocity, target_velocity, weight * delta * IDEAL_FPS)
+
+
+@onready var aura_player: AnimationPlayer = $AuraFx/AnimationPlayer
+func _on_aura_recharge() -> void:
+	aura_player.play(&"cast")

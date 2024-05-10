@@ -211,11 +211,13 @@ collision_layer = 1
 collision_mask = 0
 monitoring = false
 
-[node name="FXSpawner" parent="." index="5"]
-position = Vector2(0, -27)
+[node name="DamageFxSpawner" parent="." index="5"]
+position = Vector2(0, -48)
+
+[node name="DeathFxSpawner" parent="." index="6"]
 fx = ExtResource("5_eflh1")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="8"]
 libraries = {
 "": SubResource("AnimationLibrary_rxurk")
 }

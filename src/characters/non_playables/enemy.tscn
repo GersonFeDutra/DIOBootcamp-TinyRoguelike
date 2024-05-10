@@ -307,10 +307,10 @@ monitorable = false
 shape = SubResource("CircleShape2D_r6oqe")
 debug_color = Color(0.717647, 0.254902, 1, 0.0980392)
 
-[node name="FXSpawner" parent="." index="4"]
-position = Vector2(0, -27)
+[node name="DamageFxSpawner" parent="." index="4"]
+position = Vector2(0, -66)
 
-[node name="StateMachine" parent="." index="5" node_paths=PackedStringArray("animation_tree")]
+[node name="StateMachine" parent="." index="6" node_paths=PackedStringArray("animation_tree")]
 animation_tree = NodePath("AnimationTree")
 states = {
 0: SubResource("Resource_y3y22"),
@@ -331,7 +331,7 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_6tebr")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="ChaseBehavior" type="Node" parent="." index="6" node_paths=PackedStringArray("target_area", "state_machine")]
+[node name="ChaseBehavior" type="Node" parent="." index="7" node_paths=PackedStringArray("target_area", "state_machine")]
 script = ExtResource("4_17suj")
 target_area = NodePath("../TargetArea")
 delay = 1.0

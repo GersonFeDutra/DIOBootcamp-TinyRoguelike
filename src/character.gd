@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED_MOD := 100.  ## 1mpx
 @export_range(.1, 1000.) var speed: float = 100. ## [mpx/s]
+@onready var damage_fx_spawner := $DamageFxSpawner
 
 var flip_h: bool:
 	set(value):
@@ -19,11 +20,10 @@ func _turn_to(target_position: Vector2) -> void:
 
 
 func _die() -> void:
-	$FXSpawner.spawn(get_parent(), flip_h)
+	$DeathFxSpawner.spawn(get_parent(), flip_h)
 	queue_free()
 
 
 # TODO -> Transfer this to a connection with a BehaviorManager
-# @Virtual
-func _on_hurted(_damage: int) -> void:
-	pass
+func _on_hurted(damage: int) -> void:
+	damage_fx_spawner.spawn(get_parent(), damage)

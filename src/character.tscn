@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://cwvpp4exys4xl"]
+[gd_scene load_steps=8 format=3 uid="uid://cwvpp4exys4xl"]
 
 [ext_resource type="Script" path="res://src/character.gd" id="1_xklig"]
 [ext_resource type="PackedScene" uid="uid://baqh16bx110j1" path="res://src/areas/hurt.tscn" id="2_2vd20"]
-[ext_resource type="Script" path="res://src/characters/fx_spawner.gd" id="3_eow74"]
 [ext_resource type="PackedScene" uid="uid://c2tsjgw3oyxlk" path="res://src/areas/hit.tscn" id="3_g2hvf"]
 [ext_resource type="PackedScene" uid="uid://dw5tps5su811h" path="res://src/fx/dying.tscn" id="4_fkpuk"]
+[ext_resource type="Script" path="res://src/fx/fx_spawner.gd" id="4_yd1vu"]
+[ext_resource type="Script" path="res://src/fx/damage_spawner.gd" id="6_5rj0q"]
+[ext_resource type="PackedScene" uid="uid://bhjnmvkkdrm0b" path="res://src/fx/damage_pop.tscn" id="6_mc0vs"]
 
 [node name="Character" type="CharacterBody2D"]
 motion_mode = 1
@@ -14,9 +16,13 @@ script = ExtResource("1_xklig")
 
 [node name="HitArea" parent="." instance=ExtResource("3_g2hvf")]
 
-[node name="FXSpawner" type="Marker2D" parent="."]
-script = ExtResource("3_eow74")
+[node name="DeathFxSpawner" type="Marker2D" parent="."]
+script = ExtResource("4_yd1vu")
 fx = ExtResource("4_fkpuk")
+
+[node name="DamageFxSpawner" type="Marker2D" parent="."]
+script = ExtResource("6_5rj0q")
+fx = ExtResource("6_mc0vs")
 
 [connection signal="health_depleated" from="HurtArea" to="." method="_die"]
 [connection signal="hurted" from="HurtArea" to="." method="_on_hurted"]

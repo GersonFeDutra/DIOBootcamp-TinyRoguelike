@@ -1,10 +1,12 @@
-[gd_scene load_steps=56 format=3 uid="uid://denn0gdxcl2ng"]
+[gd_scene load_steps=58 format=3 uid="uid://denn0gdxcl2ng"]
 
 [ext_resource type="PackedScene" uid="uid://c2l2ww2iyrrfh" path="res://src/characters/non_playables/enemy.tscn" id="1_28mpw"]
 [ext_resource type="Texture2D" uid="uid://dlrfs585dytlw" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="2_5uk3o"]
 [ext_resource type="Script" path="res://src/characters/non_playables/enemies/pawn.gd" id="2_pdhvd"]
 [ext_resource type="Script" path="res://src/state_machine/state.gd" id="4_3nryn"]
+[ext_resource type="Script" path="res://src/fx/damage_spawner.gd" id="4_681nj"]
 [ext_resource type="Resource" uid="uid://jsyqquoysdip" path="res://assets/states/atk_axe.tres" id="5_asxld"]
+[ext_resource type="PackedScene" uid="uid://bhjnmvkkdrm0b" path="res://src/fx/damage_pop.tscn" id="5_fpnvi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23w5y"]
 atlas = ExtResource("2_5uk3o")
@@ -595,7 +597,14 @@ shape = SubResource("CapsuleShape2D_r500m")
 disabled = true
 debug_color = Color(0.998824, 0.0271898, 0, 0.42)
 
-[node name="StateMachine" parent="." index="6"]
+[node name="DamageFxSpawner" parent="." index="5"]
+script = ExtResource("4_681nj")
+fx = ExtResource("5_fpnvi")
+
+[node name="DeathFxSpawner" parent="." index="6"]
+position = Vector2(0, 0)
+
+[node name="StateMachine" parent="." index="7"]
 states = {
 0: SubResource("Resource_y3y22"),
 1: SubResource("Resource_7d5a8"),
@@ -613,5 +622,5 @@ libraries = {
 [node name="AnimationTree" parent="StateMachine" index="1"]
 tree_root = SubResource("AnimationNodeStateMachine_60cuu")
 
-[node name="ChaseBehavior" parent="." index="7"]
+[node name="ChaseBehavior" parent="." index="8"]
 delay = 0.5

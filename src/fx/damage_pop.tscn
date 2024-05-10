@@ -1,0 +1,139 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhjnmvkkdrm0b"]
+
+[sub_resource type="SystemFont" id="SystemFont_e5myo"]
+font_names = PackedStringArray("Monospace")
+
+[sub_resource type="SystemFont" id="SystemFont_maadi"]
+fallbacks = Array[Font]([SubResource("SystemFont_e5myo")])
+font_names = PackedStringArray("Consolas")
+
+[sub_resource type="SystemFont" id="SystemFont_nr43r"]
+fallbacks = Array[Font]([SubResource("SystemFont_maadi")])
+font_names = PackedStringArray("Hack Nerd Font")
+font_weight = 999
+generate_mipmaps = true
+oversampling = 3.7
+
+[sub_resource type="LabelSettings" id="LabelSettings_2lhe8"]
+font = SubResource("SystemFont_nr43r")
+font_size = 24
+font_color = Color(0.788235, 0.113725, 0.270588, 1)
+outline_size = 6
+outline_color = Color(0.19, 0.1577, 0.187847, 1)
+
+[sub_resource type="Animation" id="Animation_vfkv2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-36, -31)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_5qdvj"]
+resource_name = "pop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.406126, 1),
+"update": 0,
+"values": [Vector2(-36, 0), Vector2(-36, -31)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.406126, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 1),
+"transitions": PackedFloat32Array(0.5, 1.68179, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n1x0a"]
+_data = {
+"RESET": SubResource("Animation_vfkv2"),
+"pop": SubResource("Animation_5qdvj")
+}
+
+[node name="DamagePop" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_left = -36.0
+offset_top = -31.0
+offset_right = 37.0
+pivot_offset = Vector2(36, 31)
+text = "XXXX"
+label_settings = SubResource("LabelSettings_2lhe8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Label"]
+libraries = {
+"": SubResource("AnimationLibrary_n1x0a")
+}
+autoplay = "pop"
+speed_scale = 1.5

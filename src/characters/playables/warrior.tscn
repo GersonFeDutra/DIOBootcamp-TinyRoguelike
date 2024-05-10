@@ -1,9 +1,10 @@
-[gd_scene load_steps=88 format=3 uid="uid://cfdp10a5kk106"]
+[gd_scene load_steps=89 format=3 uid="uid://cfdp10a5kk106"]
 
 [ext_resource type="PackedScene" uid="uid://v7sstw2wevwl" path="res://src/characters/playable.tscn" id="1_cam16"]
 [ext_resource type="Texture2D" uid="uid://dlc3rt0kpkwek" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="2_d0c73"]
 [ext_resource type="Script" path="res://src/characters/playables/warrior.gd" id="2_kaqtd"]
 [ext_resource type="PackedScene" uid="uid://bnhpxs1mwgaeo" path="res://src/state_machine.tscn" id="5_eitsh"]
+[ext_resource type="PackedScene" uid="uid://da1i4csce3ukm" path="res://src/fx/aura.tscn" id="6_88nra"]
 [ext_resource type="Script" path="res://src/state_machine/state.gd" id="6_gudvj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sqmbw"]
@@ -1016,6 +1017,7 @@ shape = SubResource("CapsuleShape2D_2wmfk")
 debug_color = Color(0.997427, 0, 0.166181, 0.42)
 
 [node name="HitArea" parent="." index="3"]
+visible = false
 position = Vector2(0, -28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" index="0"]
@@ -1023,20 +1025,20 @@ shape = SubResource("CapsuleShape2D_u8ijh")
 disabled = true
 debug_color = Color(0.685279, 0.293368, 1, 0.42)
 
-[node name="FXSpawner" parent="." index="4"]
-position = Vector2(0, -28)
+[node name="DamageFxSpawner" parent="." index="4"]
+position = Vector2(0, -79)
 
-[node name="FxAnimationPlayer" type="AnimationPlayer" parent="." index="5"]
+[node name="FxAnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
 "": SubResource("AnimationLibrary_j7s8w")
 }
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 libraries = {
 "": SubResource("AnimationLibrary_do271")
 }
 
-[node name="StateMachine" parent="." index="7" node_paths=PackedStringArray("animation_tree") instance=ExtResource("5_eitsh")]
+[node name="StateMachine" parent="." index="8" node_paths=PackedStringArray("animation_tree") instance=ExtResource("5_eitsh")]
 animation_tree = NodePath("AnimationTree")
 states = {
 0: SubResource("Resource_dofs0"),
@@ -1052,3 +1054,12 @@ tree_root = SubResource("AnimationNodeStateMachine_y7g54")
 anim_player = NodePath("../../AnimationPlayer")
 parameters/atk/blend_position = Vector2(0, 0)
 parameters/atk_b/blend_position = Vector2(0, 0.015873)
+
+[node name="AuraFx" parent="." index="9" instance=ExtResource("6_88nra")]
+modulate = Color(0.658824, 0.443137, 0.603922, 1)
+
+[node name="Timer" type="Timer" parent="AuraFx" index="3"]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="AuraFx/Timer" to="." method="_on_aura_recharge"]
