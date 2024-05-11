@@ -1,12 +1,27 @@
 extends "res://src/character.gd"
 
 const Enemy := preload("res://src/characters/non_playables/enemy.gd")
-#var resources: int
 
+signal gold_changed(to: int)
+
+enum ResourceTypes {
+	MEAT, GOLD
+}
+@export var gold: int:
+	set(value):
+		var old_value := gold
+		gold = value
+		
+		if gold != old_value:
+			gold_changed.emit(value)
 
 # TODO -> implement resource mechanic
-func add_resource(value: int = 1) -> void:
-	hurt_area.heal(value)
+func add_resource(type: ResourceTypes, value: int = 1) -> void:
+	match type:
+		ResourceTypes.MEAT:
+			hurt_area.heal(value)
+		ResourceTypes.GOLD:
+			self.gold += value
 
 
 func _die() -> void:

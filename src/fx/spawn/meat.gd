@@ -1,6 +1,7 @@
 extends AnimatedSprite2D
 
 const Playable := preload("res://src/characters/playable.gd")
+@export var resource_type: Playable.ResourceTypes
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -12,7 +13,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _collect_to(to: Playable) -> void:
-	to.add_resource()
+	to.add_resource(resource_type)
 	queue_free()
 
 

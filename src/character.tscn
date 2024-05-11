@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://baqh16bx110j1" path="res://src/areas/hurt.tscn" id="2_2vd20"]
 [ext_resource type="PackedScene" uid="uid://c2tsjgw3oyxlk" path="res://src/areas/hit.tscn" id="3_g2hvf"]
 [ext_resource type="PackedScene" uid="uid://dw5tps5su811h" path="res://src/fx/dying.tscn" id="4_fkpuk"]
-[ext_resource type="Script" path="res://src/fx/fx_spawner.gd" id="4_yd1vu"]
-[ext_resource type="Script" path="res://src/fx/pop_spawner.gd" id="6_6ifca"]
-[ext_resource type="PackedScene" uid="uid://bhjnmvkkdrm0b" path="res://src/fx/damage_pop.tscn" id="6_mc0vs"]
-[ext_resource type="PackedScene" uid="uid://bbbetaxgak8sg" path="res://src/fx/heal_pop.tscn" id="8_ta20x"]
+[ext_resource type="Script" path="res://src/fx/spawner.gd" id="4_yd1vu"]
+[ext_resource type="Script" path="res://src/fx/spawn/pop_spawner.gd" id="6_6ifca"]
+[ext_resource type="PackedScene" uid="uid://bhjnmvkkdrm0b" path="res://src/fx/spawn/pop/damage.tscn" id="6_mc0vs"]
+[ext_resource type="PackedScene" uid="uid://bbbetaxgak8sg" path="res://src/fx/spawn/pop/heal.tscn" id="8_ta20x"]
 
 [node name="Character" type="CharacterBody2D"]
 motion_mode = 1

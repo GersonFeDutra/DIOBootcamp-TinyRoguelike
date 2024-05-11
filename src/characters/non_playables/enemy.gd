@@ -26,3 +26,8 @@ func _physics_process(delta: float) -> void:
 func clear_target() -> void:
 	set_physics_process(false)
 	behavior.clear_target()
+
+
+func _die() -> void:
+	$LootSpawner.spawn(get_parent(), flip_h)
+	super()

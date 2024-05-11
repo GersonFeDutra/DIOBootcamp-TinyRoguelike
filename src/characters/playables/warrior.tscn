@@ -1000,6 +1000,7 @@ graph_offset = Vector2(-64, -20)
 [node name="Warrior" instance=ExtResource("1_cam16")]
 script = ExtResource("2_kaqtd")
 weight = 0.15
+gold = 0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -32)

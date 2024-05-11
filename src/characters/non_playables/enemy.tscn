@@ -1,9 +1,11 @@
-[gd_scene load_steps=26 format=3 uid="uid://c2l2ww2iyrrfh"]
+[gd_scene load_steps=28 format=3 uid="uid://c2l2ww2iyrrfh"]
 
 [ext_resource type="PackedScene" uid="uid://ilgptyex1bh" path="res://src/characters/non_playable.tscn" id="1_64tqc"]
 [ext_resource type="Script" path="res://src/characters/non_playables/enemy.gd" id="2_eybld"]
+[ext_resource type="Script" path="res://src/fx/spawners/loot.gd" id="3_d10ap"]
 [ext_resource type="Script" path="res://src/state_machine/state.gd" id="3_f6mbt"]
 [ext_resource type="Script" path="res://src/lib/behaviors/chase.gd" id="4_17suj"]
+[ext_resource type="PackedScene" uid="uid://78ssmdwn0ka0" path="res://src/fx/spawn/gold.tscn" id="4_huung"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_v8dxp"]
 animations = [{
@@ -307,10 +309,15 @@ monitorable = false
 shape = SubResource("CircleShape2D_r6oqe")
 debug_color = Color(0.717647, 0.254902, 1, 0.0980392)
 
-[node name="DamageFxSpawner" parent="." index="4"]
+[node name="LootSpawner" type="Marker2D" parent="." index="4"]
+script = ExtResource("3_d10ap")
+padding = 6.0
+fx = ExtResource("4_huung")
+
+[node name="DamageFxSpawner" parent="." index="6"]
 position = Vector2(0, -66)
 
-[node name="StateMachine" parent="." index="6" node_paths=PackedStringArray("animation_tree")]
+[node name="StateMachine" parent="." index="7" node_paths=PackedStringArray("animation_tree")]
 animation_tree = NodePath("AnimationTree")
 states = {
 0: SubResource("Resource_y3y22"),
@@ -331,7 +338,7 @@ root_node = NodePath("../..")
 tree_root = SubResource("AnimationNodeStateMachine_6tebr")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="ChaseBehavior" type="Node" parent="." index="7" node_paths=PackedStringArray("target_area", "state_machine")]
+[node name="ChaseBehavior" type="Node" parent="." index="8" node_paths=PackedStringArray("target_area", "state_machine")]
 script = ExtResource("4_17suj")
 target_area = NodePath("../TargetArea")
 delay = 1.0

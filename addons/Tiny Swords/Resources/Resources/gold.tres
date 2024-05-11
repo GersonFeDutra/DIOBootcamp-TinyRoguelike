@@ -1,0 +1,7 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://c5lykafica5ui"]
+
+[ext_resource type="Texture2D" uid="uid://doy6xe128gs8h" path="res://addons/Tiny Swords/Resources/Resources/G_Idle_(NoShadow).png" id="1_1sncq"]
+
+[resource]
+atlas = ExtResource("1_1sncq")
+region = Rect2(48, 51, 43, 45)
