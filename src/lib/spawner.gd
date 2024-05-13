@@ -13,9 +13,8 @@ var frequency: float = 1.0 ## Frequency of spawns [amount/sec]
 func _ready() -> void:
 	rng.randomize()
 	
-	@warning_ignore("shadowed_variable")
-	for spawn in spawns:
-		_total_weight += spawn.random_weight
+	for _spawn in spawns:
+		_total_weight += _spawn.random_weight
 	
 	timer = Timer.new()
 	timer.autostart = true
@@ -36,14 +35,13 @@ func spawn() -> void:
 func get_next() -> Spawn:
 	var rand_zone: float = rng.randf() * _total_weight
 	var current: Spawn
-	var count: float
+	var count: float = 0.
 	
-	@warning_ignore("shadowed_variable")
-	for spawn in spawns:
-		if rand_zone <= count + spawn.random_weight:
-			current = spawn
+	for _spawn in spawns:
+		if rand_zone <= count + _spawn.random_weight:
+			current = _spawn
 			break
-		count += spawn.random_weight
+		count += _spawn.random_weight
 	
 	return current
 

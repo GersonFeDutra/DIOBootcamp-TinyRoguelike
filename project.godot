@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dio"
-run/main_scene="res://src/world.tscn"
+run/main_scene="res://world.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
 run/ignore_damage=true
@@ -33,6 +33,7 @@ folder_colors={
 "res://src/autoload/": "gray",
 "res://src/characters/": "yellow",
 "res://src/fx/": "purple",
+"res://src/hud/": "teal",
 "res://src/lib/": "gray"
 }
 
