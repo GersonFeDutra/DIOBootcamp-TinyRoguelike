@@ -1,3 +1,4 @@
+@tool
 extends Node2D
 
 var _total_weight: float
@@ -11,6 +12,9 @@ var frequency: float = 1.0 ## Frequency of spawns [amount/sec]
 
 
 func _ready() -> void:
+	if Engine.is_editor_hint():
+		return
+	
 	rng.randomize()
 	
 	for _spawn in spawns:

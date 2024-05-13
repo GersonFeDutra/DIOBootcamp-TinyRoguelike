@@ -1,7 +1,10 @@
-[gd_scene load_steps=32 format=3 uid="uid://tt1hjgdlyxvb"]
+[gd_scene load_steps=35 format=3 uid="uid://tt1hjgdlyxvb"]
 
 [ext_resource type="PackedScene" uid="uid://c2l2ww2iyrrfh" path="res://src/characters/non_playables/enemy.tscn" id="1_65oal"]
+[ext_resource type="Script" path="res://src/characters/non_playables/enemies/torch_goblin.gd" id="2_ltebj"]
 [ext_resource type="Texture2D" uid="uid://d3dg4yds7b81v" path="res://addons/Tiny Swords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="3_g67wm"]
+[ext_resource type="Script" path="res://src/fx/spawners/loot.gd" id="3_lrjr2"]
+[ext_resource type="PackedScene" uid="uid://d18u5npqe51a8" path="res://src/fx/spawn/meat.tscn" id="4_n3yy0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vsx3e"]
 atlas = ExtResource("3_g67wm")
@@ -383,6 +386,7 @@ _data = {
 }
 
 [node name="TorchGoblin" instance=ExtResource("1_65oal")]
+script = ExtResource("2_ltebj")
 speed = 25.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
@@ -409,6 +413,16 @@ rotation = -1.10377
 shape = SubResource("CapsuleShape2D_3wu55")
 disabled = true
 debug_color = Color(1, 0.027451, 0, 0.419608)
+
+[node name="LootSpawner" parent="." index="5"]
+chance = 0.7
+
+[node name="ExtraLootSpawner" type="Marker2D" parent="." index="6"]
+script = ExtResource("3_lrjr2")
+chance = 0.3
+padding = 6.0
+max_value = 2
+fx = ExtResource("4_n3yy0")
 
 [node name="AnimationPlayer" parent="StateMachine" index="0"]
 libraries = {

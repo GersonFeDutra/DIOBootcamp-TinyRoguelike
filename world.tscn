@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bfjce0ocs1i8f"]
+[gd_scene load_steps=66 format=3 uid="uid://bfjce0ocs1i8f"]
 
 [ext_resource type="Script" path="res://src/fx/camera/screenshake_amplify.gd" id="1_huwsm"]
 [ext_resource type="Script" path="res://world.gd" id="1_sm3vd"]
@@ -31,6 +31,7 @@
 [ext_resource type="Texture2D" uid="uid://6gmsn5q5rfor" path="res://addons/Tiny Swords/Deco/17.png" id="12_u4ocg"]
 [ext_resource type="Script" path="res://src/hud/controller.gd" id="12_wfjw3"]
 [ext_resource type="Texture2D" uid="uid://capywh5bu1aap" path="res://addons/Tiny Swords/Deco/18.png" id="13_gpq1c"]
+[ext_resource type="Script" path="res://src/levelling.gd" id="32_csq51"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrta1"]
 texture = ExtResource("2_u6gk5")
@@ -300,6 +301,20 @@ _data = {
 }
 point_count = 5
 
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_pgv8w"]
+color = Color(0.0862745, 0.109804, 0.180392, 0.556863)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8k483"]
+bg_color = Color(0.466667, 0.32549, 0.588235, 1)
+skew = Vector2(0.4, 0)
+corner_radius_top_left = 5
+corner_radius_bottom_left = 3
+corner_detail = 4
+expand_margin_left = 6.0
+
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4aio5"]
 texture = ExtResource("9_ag4j0")
 texture_margin_left = 32.0
@@ -410,22 +425,36 @@ rotation = 0.00716816
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
-[node name="MeatDisplay" type="MarginContainer" parent="HUD"]
-anchors_preset = 1
-anchor_left = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="HUD"]
+anchors_preset = 10
 anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 40.0
-grow_horizontal = 0
-theme_override_constants/margin_top = 8
-theme_override_constants/margin_right = 8
+grow_horizontal = 2
 
-[node name="Panel" type="Panel" parent="HUD/MeatDisplay"]
-custom_minimum_size = Vector2(240, 80)
+[node name="WaveProgressBar" type="ProgressBar" parent="HUD/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 16)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxLine_pgv8w")
+theme_override_styles/fill = SubResource("StyleBoxFlat_8k483")
+step = 0.001
+value = 5.0
+show_percentage = false
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer"]
+layout_mode = 2
+
+[node name="GoldDisplay" type="MarginContainer" parent="HUD/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+
+[node name="Panel" type="Panel" parent="HUD/VBoxContainer/HBoxContainer/GoldDisplay"]
+custom_minimum_size = Vector2(200, 88)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_4aio5")
 
-[node name="MarginContainer" type="MarginContainer" parent="HUD/MeatDisplay/Panel"]
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer/HBoxContainer/GoldDisplay/Panel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -437,88 +466,97 @@ theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 40
 
-[node name="ColorRect" type="ColorRect" parent="HUD/MeatDisplay/Panel/MarginContainer"]
+[node name="ColorRect" type="ColorRect" parent="HUD/VBoxContainer/HBoxContainer/GoldDisplay/Panel/MarginContainer"]
 visible = false
 layout_mode = 2
 color = Color(1, 0, 0.439216, 0.501961)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/MeatDisplay/Panel/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer/HBoxContainer/GoldDisplay/Panel/MarginContainer"]
 layout_mode = 2
 
-[node name="LifeLabel" type="Label" parent="HUD/MeatDisplay/Panel/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HUD/VBoxContainer/HBoxContainer/GoldDisplay/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+texture = ExtResource("11_wycc8")
+
+[node name="GoldLabel" type="Label" parent="HUD/VBoxContainer/HBoxContainer/GoldDisplay/Panel/MarginContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+text = "XXXX"
+label_settings = SubResource("LabelSettings_ma1op")
+
+[node name="MeatDisplay" type="MarginContainer" parent="HUD/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+
+[node name="Panel" type="Panel" parent="HUD/VBoxContainer/HBoxContainer/MeatDisplay"]
+custom_minimum_size = Vector2(240, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4aio5")
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/VBoxContainer/HBoxContainer/MeatDisplay/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 40
+
+[node name="ColorRect" type="ColorRect" parent="HUD/VBoxContainer/HBoxContainer/MeatDisplay/Panel/MarginContainer"]
+visible = false
+layout_mode = 2
+color = Color(1, 0, 0.439216, 0.501961)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/VBoxContainer/HBoxContainer/MeatDisplay/Panel/MarginContainer"]
+layout_mode = 2
+
+[node name="LifeLabel" type="Label" parent="HUD/VBoxContainer/HBoxContainer/MeatDisplay/Panel/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 10
 text = "XXXX"
 label_settings = SubResource("LabelSettings_ma1op")
 
-[node name="OfLabel" type="Label" parent="HUD/MeatDisplay/Panel/MarginContainer/HBoxContainer"]
+[node name="OfLabel" type="Label" parent="HUD/VBoxContainer/HBoxContainer/MeatDisplay/Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "of"
 label_settings = SubResource("LabelSettings_ma1op")
 
-[node name="MaxLifeLabel" type="Label" parent="HUD/MeatDisplay/Panel/MarginContainer/HBoxContainer"]
+[node name="MaxLifeLabel" type="Label" parent="HUD/VBoxContainer/HBoxContainer/MeatDisplay/Panel/MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 8
+size_flags_horizontal = 2
 text = "XXXX"
 label_settings = SubResource("LabelSettings_ma1op")
 
-[node name="TextureRect" type="TextureRect" parent="HUD/MeatDisplay/Panel/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="HUD/VBoxContainer/HBoxContainer/MeatDisplay/Panel/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
 texture = ExtResource("10_4ukvt")
 
-[node name="GoldDisplay" type="MarginContainer" parent="HUD"]
-offset_right = 208.0
-offset_bottom = 88.0
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 8
-
-[node name="Panel" type="Panel" parent="HUD/GoldDisplay"]
-custom_minimum_size = Vector2(200, 88)
-layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_4aio5")
-
-[node name="MarginContainer" type="MarginContainer" parent="HUD/GoldDisplay/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 40
-
-[node name="ColorRect" type="ColorRect" parent="HUD/GoldDisplay/Panel/MarginContainer"]
-visible = false
-layout_mode = 2
-color = Color(1, 0, 0.439216, 0.501961)
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD/GoldDisplay/Panel/MarginContainer"]
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="HUD/GoldDisplay/Panel/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 2
-texture = ExtResource("11_wycc8")
-
-[node name="GoldLabel" type="Label" parent="HUD/GoldDisplay/Panel/MarginContainer/HBoxContainer"]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 2
-text = "XXXX"
-label_settings = SubResource("LabelSettings_ma1op")
-
 [node name="HudController" type="Node" parent="."]
 script = ExtResource("12_wfjw3")
+
+[node name="Levelling" type="Node" parent="." node_paths=PackedStringArray("spawner")]
+script = ExtResource("32_csq51")
+spawner = NodePath("../NPCs/Spawner")
+
+[node name="WaveTimer" type="Timer" parent="Levelling"]
+wait_time = 60.0
+autostart = true
 
 [connection signal="gold_changed" from="Player" to="HudController" method="_on_player_gold_changed"]
 [connection signal="healed" from="Player/HurtArea" to="Camera2D" method="breath" unbinds=1]
 [connection signal="health_changed" from="Player/HurtArea" to="HudController" method="_on_player_health_changed"]
 [connection signal="hurted" from="Player/HurtArea" to="Camera2D" method="shake_amplify_to"]
+[connection signal="timeout" from="Levelling/WaveTimer" to="Levelling" method="_next_wave"]
 
 [editable path="Player"]

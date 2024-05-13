@@ -27,7 +27,7 @@ script = ExtResource("2_22mx2")
 [node name="HitArea" parent="." index="2"]
 collision_mask = 2
 
-[node name="StateMachine" parent="." index="5" instance=ExtResource("3_jn3k2")]
+[node name="StateMachine" parent="." index="6" instance=ExtResource("3_jn3k2")]
 states = {
 0: SubResource("Resource_efrm0"),
 1: SubResource("Resource_7d5a8")

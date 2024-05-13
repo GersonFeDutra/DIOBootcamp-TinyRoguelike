@@ -15,6 +15,7 @@ enum ResourceTypes {
 		if gold != old_value:
 			gold_changed.emit(value)
 
+
 # TODO -> implement resource mechanic
 func add_resource(type: ResourceTypes, value: int = 1) -> void:
 	match type:

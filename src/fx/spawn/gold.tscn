@@ -1,7 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://78ssmdwn0ka0"]
+[gd_scene load_steps=14 format=3 uid="uid://78ssmdwn0ka0"]
 
 [ext_resource type="Texture2D" uid="uid://s8fn2jonu514" path="res://addons/Tiny Swords/Resources/Resources/G_Spawn.png" id="1_715rg"]
-[ext_resource type="Script" path="res://src/fx/spawn/meat.gd" id="2_g5lxu"]
+[ext_resource type="Script" path="res://src/fx/spawn/gold.gd" id="2_sqsd4"]
+[ext_resource type="Script" path="res://src/fx/spawn/pop_spawner.gd" id="3_anw2c"]
+[ext_resource type="PackedScene" uid="uid://govuwua7gojc" path="res://src/fx/spawn/pop/gold.tscn" id="4_6pkjw"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cojwi"]
 atlas = ExtResource("1_715rg")
@@ -66,7 +68,7 @@ radius = 29.0
 [node name="GoldSpawn" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_aptsg")
 autoplay = "default"
-script = ExtResource("2_g5lxu")
+script = ExtResource("2_sqsd4")
 resource_type = 1
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -78,6 +80,12 @@ monitorable = false
 position = Vector2(0, 13)
 shape = SubResource("CircleShape2D_iljve")
 debug_color = Color(0.510293, 0.577911, 7.70092e-07, 0.42)
+
+[node name="GoldFxSpawner" type="Marker2D" parent="."]
+position = Vector2(0, -16)
+script = ExtResource("3_anw2c")
+fx = ExtResource("4_6pkjw")
+prefix = "+"
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
