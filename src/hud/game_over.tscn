@@ -653,7 +653,7 @@ offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(112, 31)
-text = "GAME OVER"
+text = "GAME_OVER"
 label_settings = SubResource("LabelSettings_0vmnp")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -665,10 +665,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -336.5
-offset_top = -272.0
-offset_right = 142.5
-offset_bottom = -47.0
+offset_left = -912.5
+offset_top = -596.0
+offset_right = -433.5
+offset_bottom = -371.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ywtt8")
@@ -700,7 +700,7 @@ columns = 2
 [node name="ScoreLabel" type="Label" parent="ScorePanel/MarginContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-text = "Total Score:"
+text = "SCORE"
 label_settings = SubResource("LabelSettings_xi8i0")
 horizontal_alignment = 2
 visible_characters = 0
@@ -717,7 +717,7 @@ label_settings = SubResource("LabelSettings_xi8i0")
 [node name="GoldLabel" type="Label" parent="ScorePanel/MarginContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-text = "Gold Earned:"
+text = "GOLD"
 label_settings = SubResource("LabelSettings_xi8i0")
 horizontal_alignment = 2
 
@@ -732,7 +732,7 @@ label_settings = SubResource("LabelSettings_xi8i0")
 [node name="WavesLabel" type="Label" parent="ScorePanel/MarginContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-text = "Waves survived:"
+text = "WAVES"
 label_settings = SubResource("LabelSettings_xi8i0")
 horizontal_alignment = 2
 
@@ -747,7 +747,7 @@ label_settings = SubResource("LabelSettings_xi8i0")
 [node name="KillsLabel" type="Label" parent="ScorePanel/MarginContainer/CenterContainer/GridContainer"]
 layout_mode = 2
 size_flags_vertical = 0
-text = "Enemies defeated:"
+text = "KILLS"
 label_settings = SubResource("LabelSettings_xi8i0")
 horizontal_alignment = 2
 

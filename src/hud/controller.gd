@@ -33,6 +33,11 @@ func _on_player_gold_changed(to: int) -> void:
 
 
 func _on_player_health_depleated() -> void:
-	%Levelling.set_process(false)
+	_disable_on_game_over()
 	%GameOver.fade_in(player.gold, %Levelling.current_wave, player.kills)
 	set_process_unhandled_input(true)
+
+
+func _disable_on_game_over() -> void:
+	%Levelling.set_process(false)
+	ControllsGuide.set_process_input(false)

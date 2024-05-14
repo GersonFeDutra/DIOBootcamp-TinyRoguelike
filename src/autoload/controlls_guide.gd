@@ -56,6 +56,7 @@ func setup() -> void:
 	if is_finished:
 		return
 	await get_tree().process_frame
+	set_process_input(true)
 	follow_playable()
 	set_playable_can_attack(false)
 	%ArrowKeys.get_node("AnimationPlayer").play(&"fade_in")
