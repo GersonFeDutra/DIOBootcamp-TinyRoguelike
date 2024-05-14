@@ -8,6 +8,7 @@ const DEAD_ZONE := .15
 enum States { IDLE = 0, RUNNING = 1, ATTACKING = 2 }
 
 @export_range(.001, 1.) var weight := .05  ## [fixed frames%]
+@export var can_attack: bool = true
 
 var _direction := Vector2.ZERO
 var _is_sword_left: bool
@@ -31,7 +32,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed(&"move_right"):
 		self.flip_h = false
 	
-	if event.is_action_pressed(&"attack"):
+	if event.is_action_pressed(&"attack") and can_attack:
 		state_machine.change_state_from(
 				States.ATTACKING + int(_is_sword_left), _direction)
 		_is_sword_left = not _is_sword_left

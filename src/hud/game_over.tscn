@@ -1,10 +1,20 @@
-[gd_scene load_steps=20 format=3 uid="uid://dgnehkxpwul3n"]
+[gd_scene load_steps=35 format=3 uid="uid://dgnehkxpwul3n"]
 
 [ext_resource type="Script" path="res://src/hud/game_over.gd" id="1_nmn42"]
 [ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="2_1jlqy"]
 [ext_resource type="Texture2D" uid="uid://dsky3qvj3vqtk" path="res://addons/Tiny Swords/UI/Ribbons/Ribbon_Red_3Slides.png" id="3_fobjr"]
 [ext_resource type="Texture2D" uid="uid://cxldo4ci3rfbn" path="res://addons/Tiny Swords/UI/Banners/Banner_Horizontal.png" id="4_058ab"]
 [ext_resource type="Shader" path="res://assets/shaders/pixelate.gdshader" id="5_7mghc"]
+[ext_resource type="Texture2D" uid="uid://bdls2nlyipgfp" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Light/Esc_Key_Light.png" id="7_e6a7k"]
+[ext_resource type="Texture2D" uid="uid://buqn3nftu7mju" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Light/Mouse_Simple_Key_Light.png" id="8_c3lej"]
+[ext_resource type="Texture2D" uid="uid://v3qv2wm7rnfv" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Light/Mouse_Right_Key_Light.png" id="8_gsm86"]
+[ext_resource type="Texture2D" uid="uid://dja6cxwhiv1j6" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Dark/Esc_Key_Dark.png" id="9_m0diu"]
+[ext_resource type="Texture2D" uid="uid://dsyj6iprd2qtc" path="res://addons/Xelu_Free_Controller&Key_Prompts/Switch/Switch_Controllers_Separate.png" id="9_tyw4e"]
+[ext_resource type="Texture2D" uid="uid://d0o07vcqniqg5" path="res://addons/Xelu_Free_Controller&Key_Prompts/PS4/PS4_Triangle.png" id="9_yf18u"]
+[ext_resource type="Texture2D" uid="uid://jo1rg5jmv41m" path="res://addons/Xelu_Free_Controller&Key_Prompts/Switch/Switch_X.png" id="10_8xckm"]
+[ext_resource type="Texture2D" uid="uid://cj2twuqwavb0e" path="res://addons/Xelu_Free_Controller&Key_Prompts/Xbox Series X/XboxSeriesX_Y.png" id="11_ajgr2"]
+[ext_resource type="Texture2D" uid="uid://cttex1sycfnm6" path="res://addons/Xelu_Free_Controller&Key_Prompts/PS4/PS4_Diagram.png" id="11_aprdh"]
+[ext_resource type="Texture2D" uid="uid://brotd2skl82xq" path="res://addons/Xelu_Free_Controller&Key_Prompts/Xbox Series X/XboxSeriesX_Diagram.png" id="12_p5y61"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7e7kq"]
 shader = ExtResource("2_1jlqy")
@@ -58,6 +68,58 @@ font_size = 33
 font_color = Color(1, 0.798003, 0.638838, 1)
 outline_size = 8
 outline_color = Color(0.0862745, 0.109804, 0.180392, 1)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_golwl"]
+frames = 2
+frame_0/texture = ExtResource("7_e6a7k")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("9_m0diu")
+frame_1/duration = 0.3
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_p8veb"]
+frames = 2
+frame_0/texture = ExtResource("8_c3lej")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("8_gsm86")
+frame_1/duration = 0.3
+
+[sub_resource type="Animation" id="Animation_gf2ka"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Console:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_81w21"]
+resource_name = "press_loop"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Console:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.497474, 0.497474, 0.497474, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xd4c3"]
+_data = {
+"RESET": SubResource("Animation_gf2ka"),
+"press_loop": SubResource("Animation_81w21")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_70ksv"]
 shader = ExtResource("5_7mghc")
@@ -249,7 +311,7 @@ tracks/14/keys = {
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("TextureRect:material:shader_parameter/x_pixel_size")
+tracks/15/path = NodePath("Overlay:material:shader_parameter/x_pixel_size")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
@@ -261,7 +323,7 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("TextureRect:material:shader_parameter/y_pixel_size")
+tracks/16/path = NodePath("Overlay:material:shader_parameter/y_pixel_size")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
@@ -269,6 +331,30 @@ tracks/16/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Buttons/HboxConteiner:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Buttons/HboxConteiner:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_08lei"]
@@ -465,13 +551,37 @@ tracks/15/keys = {
 "update": 0,
 "values": [0.0, 1.0]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Buttons/HboxConteiner:modulate")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(7.21001, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Buttons/HboxConteiner:visible")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_c6ug5"]
 resource_name = "transition"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:material:shader_parameter/x_pixel_size")
+tracks/0/path = NodePath("Overlay:material:shader_parameter/x_pixel_size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -483,7 +593,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextureRect:material:shader_parameter/y_pixel_size")
+tracks/1/path = NodePath("Overlay:material:shader_parameter/y_pixel_size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -515,7 +625,6 @@ color = Color(0.470588, 0.180392, 0.654902, 0)
 
 [node name="TitlePanel" type="Panel" parent="."]
 visible = false
-modulate = Color(1, 1, 1, 0.1902)
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -556,10 +665,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -912.5
-offset_top = -596.0
-offset_right = -433.5
-offset_bottom = -371.0
+offset_left = -336.5
+offset_top = -272.0
+offset_right = 142.5
+offset_bottom = -47.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_ywtt8")
@@ -650,7 +759,91 @@ size_flags_vertical = 0
 text = "XXXX"
 label_settings = SubResource("LabelSettings_xi8i0")
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Buttons" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HboxConteiner" type="HBoxContainer" parent="Buttons"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -412.0
+offset_top = -100.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2
+
+[node name="EscKey" type="TextureRect" parent="Buttons/HboxConteiner"]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_golwl")
+
+[node name="MouseLeftKey" type="TextureRect" parent="Buttons/HboxConteiner"]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_p8veb")
+
+[node name="Console" type="HBoxContainer" parent="Buttons/HboxConteiner"]
+unique_name_in_owner = true
+layout_mode = 2
+alignment = 2
+
+[node name="SwitchIcon" type="TextureRect" parent="Buttons/HboxConteiner/Console"]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_tyw4e")
+
+[node name="SwitchX" type="TextureRect" parent="Buttons/HboxConteiner/Console"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("10_8xckm")
+
+[node name="Ps4Diagram" type="TextureRect" parent="Buttons/HboxConteiner/Console"]
+visible = false
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+texture = ExtResource("11_aprdh")
+expand_mode = 1
+
+[node name="Ps4Triangle" type="TextureRect" parent="Buttons/HboxConteiner/Console"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
+layout_mode = 2
+texture = ExtResource("9_yf18u")
+
+[node name="XboxSeriesXDiagram" type="TextureRect" parent="Buttons/HboxConteiner/Console"]
+visible = false
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+texture = ExtResource("12_p5y61")
+expand_mode = 1
+
+[node name="XboxSeriesXY" type="TextureRect" parent="Buttons/HboxConteiner/Console"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+texture = ExtResource("11_ajgr2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Buttons/HboxConteiner"]
+libraries = {
+"": SubResource("AnimationLibrary_xd4c3")
+}
+autoplay = "press_loop"
+
+[node name="Overlay" type="TextureRect" parent="."]
 material = SubResource("ShaderMaterial_70ksv")
 anchors_preset = 15
 anchor_right = 1.0

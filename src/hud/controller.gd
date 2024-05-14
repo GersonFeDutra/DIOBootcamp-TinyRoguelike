@@ -15,7 +15,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _ready() -> void:
-	set_process_input(false)
+	set_process_unhandled_input(false)
 	
 	var health_max := str(player_hurt_area.health_max)
 	life_label.text = health_max
@@ -33,4 +33,6 @@ func _on_player_gold_changed(to: int) -> void:
 
 
 func _on_player_health_depleated() -> void:
+	%Levelling.set_process(false)
 	%GameOver.fade_in(player.gold, %Levelling.current_wave, player.kills)
+	set_process_unhandled_input(true)
