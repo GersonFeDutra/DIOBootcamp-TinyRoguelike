@@ -11,3 +11,5 @@ gold = 0
 [node name="HurtArea" parent="." index="0"]
 collision_layer = 2
 health_max = 6
+
+[connection signal="killed" from="HitArea" to="." method="_on_killed"]

@@ -8,6 +8,7 @@ const DEAD_ZONE := .15
 enum States { IDLE = 0, RUNNING = 1, ATTACKING = 2 }
 
 @export_range(.001, 1.) var weight := .05  ## [fixed frames%]
+
 var _direction := Vector2.ZERO
 var _is_sword_left: bool
 

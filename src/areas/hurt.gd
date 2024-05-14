@@ -28,3 +28,7 @@ func heal(amount: int) -> void:
 	self.health = new_health
 	
 	healed.emit(new_health - health)
+
+
+func is_health_depleated() -> bool:
+	return health <= 0

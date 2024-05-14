@@ -15,6 +15,8 @@ enum ResourceTypes {
 		if gold != old_value:
 			gold_changed.emit(value)
 
+var kills: int
+
 
 # TODO -> implement resource mechanic
 func add_resource(type: ResourceTypes, value: int = 1) -> void:
@@ -31,3 +33,7 @@ func _die() -> void:
 		assert(enemy != null, "node is not an enemy")
 		enemy.clear_target()
 	super()
+
+
+func _on_killed() -> void:
+	kills += 1

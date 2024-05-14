@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://bfjce0ocs1i8f"]
+[gd_scene load_steps=73 format=3 uid="uid://bfjce0ocs1i8f"]
 
 [ext_resource type="Script" path="res://src/fx/camera/screenshake_amplify.gd" id="1_huwsm"]
 [ext_resource type="Script" path="res://world.gd" id="1_sm3vd"]
@@ -31,7 +31,9 @@
 [ext_resource type="Texture2D" uid="uid://6gmsn5q5rfor" path="res://addons/Tiny Swords/Deco/17.png" id="12_u4ocg"]
 [ext_resource type="Script" path="res://src/hud/controller.gd" id="12_wfjw3"]
 [ext_resource type="Texture2D" uid="uid://capywh5bu1aap" path="res://addons/Tiny Swords/Deco/18.png" id="13_gpq1c"]
+[ext_resource type="PackedScene" uid="uid://dgnehkxpwul3n" path="res://src/hud/game_over.tscn" id="31_souph"]
 [ext_resource type="Script" path="res://src/levelling.gd" id="32_csq51"]
+[ext_resource type="Shader" path="res://assets/shaders/pixelate.gdshader" id="32_lllia"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrta1"]
 texture = ExtResource("2_u6gk5")
@@ -325,11 +327,13 @@ region_rect = Rect2(32, 48, 128, 128)
 
 [sub_resource type="SystemFont" id="SystemFont_e266u"]
 font_names = PackedStringArray("Monospace")
+subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_7mqux"]
 fallbacks = Array[Font]([SubResource("SystemFont_e266u")])
 font_names = PackedStringArray("Franklin Gothic")
 font_italic = true
+subpixel_positioning = 0
 oversampling = 6.4
 
 [sub_resource type="LabelSettings" id="LabelSettings_ma1op"]
@@ -338,6 +342,111 @@ font_size = 26
 font_color = Color(1, 0.798003, 0.638838, 1)
 outline_size = 8
 outline_color = Color(0.0862745, 0.109804, 0.180392, 1)
+
+[sub_resource type="GDScript" id="GDScript_ujxul"]
+script/source = "extends CanvasLayer
+
+
+func _ready() -> void:
+	await get_tree().process_frame
+	get_tree().paused = true
+	await get_tree().process_frame
+	var image = get_viewport().get_texture().get_image()
+	var texture = ImageTexture.create_from_image(image)
+	$TextureRect.texture = texture
+	
+	$AnimationPlayer.play(&\"transition_in\")
+	get_tree().paused = false
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t1s4k"]
+shader = ExtResource("32_lllia")
+shader_parameter/x_pixel_size = 1
+shader_parameter/y_pixel_size = 1
+
+[sub_resource type="Animation" id="Animation_at7kw"]
+resource_name = "transition_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/x_pixel_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [10, 1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:material:shader_parameter/y_pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [10, 1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(0.5, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_euro8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:material:shader_parameter/x_pixel_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:material:shader_parameter/y_pixel_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("TextureRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rxq0h"]
+_data = {
+"RESET": SubResource("Animation_euro8"),
+"transition_in": SubResource("Animation_at7kw")
+}
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
@@ -542,10 +651,29 @@ layout_mode = 2
 size_flags_horizontal = 2
 texture = ExtResource("10_4ukvt")
 
-[node name="HudController" type="Node" parent="."]
-script = ExtResource("12_wfjw3")
+[node name="GameOver" parent="." instance=ExtResource("31_souph")]
+unique_name_in_owner = true
+
+[node name="Transition" type="CanvasLayer" parent="."]
+process_mode = 3
+script = SubResource("GDScript_ujxul")
+
+[node name="TextureRect" type="TextureRect" parent="Transition"]
+material = SubResource("ShaderMaterial_t1s4k")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Transition"]
+libraries = {
+"": SubResource("AnimationLibrary_rxq0h")
+}
+speed_scale = 1.5
 
 [node name="Levelling" type="Node" parent="." node_paths=PackedStringArray("spawner")]
+unique_name_in_owner = true
 script = ExtResource("32_csq51")
 spawner = NodePath("../NPCs/Spawner")
 
@@ -553,9 +681,17 @@ spawner = NodePath("../NPCs/Spawner")
 wait_time = 60.0
 autostart = true
 
+[node name="HudController" type="Node" parent="."]
+script = ExtResource("12_wfjw3")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.384314, 0.384314, 0.670588, 1)
+
 [connection signal="gold_changed" from="Player" to="HudController" method="_on_player_gold_changed"]
 [connection signal="healed" from="Player/HurtArea" to="Camera2D" method="breath" unbinds=1]
 [connection signal="health_changed" from="Player/HurtArea" to="HudController" method="_on_player_health_changed"]
+[connection signal="health_depleated" from="Player/HurtArea" to="HudController" method="_on_player_health_depleated"]
 [connection signal="hurted" from="Player/HurtArea" to="Camera2D" method="shake_amplify_to"]
 [connection signal="timeout" from="Levelling/WaveTimer" to="Levelling" method="_next_wave"]
 
