@@ -67,9 +67,9 @@ jobs:
           # The files to push to itch.
           # File paths support globing and may start with a channel name.
           files: |
-            linux:${{ steps.export.outputs.archive_directory }}/LinuxX11.zip
-            web:${{ steps.export.outputs.archive_directory }}/Web.zip
-            windows:${{ steps.export.outputs.archive_directory }}/Windows\ Desktop.zip
+            linux    ${{ steps.export.outputs.archive_directory }}/LinuxX11.zip
+            web      ${{ steps.export.outputs.archive_directory }}/Web.zip
+            windows  ${{ steps.export.outputs.archive_directory }}/Windows\ Desktop.zip
           # If no channel is provided for a file, to generate one from the
           # file's name.
           auto_channel: true
