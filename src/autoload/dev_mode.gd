@@ -1,6 +1,6 @@
 extends Node
 
-var ignore_damage: bool
+var ignore_damage: bool = false
 var time_scale: float:
 	set(value):
 		Engine.time_scale = value
