@@ -1,7 +1,7 @@
 # Godot 2DProject' Santander Bootcamp
 
 Game Development bootcamp project from Dio sponsored by Santander:
-Godot 2D Game Project
+Godot 2D Game Project.
 
 Game inspired on the [Tiny Swords asset pack](https://pixelfrog-assets.itch.io/tiny-swords) from [Pixel Frog](https://pixelfrog-assets.itch.io/). - Which assets were used on this project.
 
