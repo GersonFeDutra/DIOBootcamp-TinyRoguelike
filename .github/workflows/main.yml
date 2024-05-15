@@ -33,6 +33,15 @@ jobs:
           relative_project_path: ./
           archive_output: true
 
+      - name: verify exported files
+        run: ls -lR ${{ steps.export.outputs.archive_directory }}
+
+      - name: delete existing release
+        run: |
+          gh release delete ${{ github.ref_name }} --yes || true
+        env:
+          GITHUB_TOKEN: ${{ secrets.API_GITHUB }}
+
         # This release action has worked well for me. However, you can most likely use any release action of your choosing.
         # https://github.com/ncipollo/release-action
       - name: create release
