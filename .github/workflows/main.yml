@@ -49,7 +49,7 @@ jobs:
         with:
           token: ${{ secrets.API_GITHUB }}
           generateReleaseNotes: true
-          tag: v${{ github.run_number }}
+          tag: v1.${{ github.run_number }}
           artifacts: ${{ steps.export.outputs.archive_directory }}/*
 
       - name: Butler to Itch
@@ -72,7 +72,7 @@ jobs:
           # The name of the game in the project's url
           itch_game: "Tiny Roguelike"
           # The game version number
-          version: v${{ github.run_number }}
+          version: v1.${{ github.run_number }}
           # The files to push to itch.
           # File paths support globing and may start with a channel name.
           files: |
