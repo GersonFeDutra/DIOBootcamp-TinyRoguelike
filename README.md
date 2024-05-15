@@ -1,7 +1,9 @@
-# Godot 2DProject' Santander Bootcamp
+# Godot 2DProject' Tiny Roguelike - Santander Bootcamp
+
+[![[Tiny Roguelike Screenshot]](.github/screenshot.jpg)](https://gersonfedutra.itch.io/tiny-roguelike)
 
 Game Development bootcamp project from Dio sponsored by Santander:
-Godot 2D Game Project.
+Godot 2D Game Project: [Tiny Roguelike - play on itch.io](https://gersonfedutra.itch.io/tiny-roguelike).
 
 Game inspired on the [Tiny Swords asset pack](https://pixelfrog-assets.itch.io/tiny-swords) from [Pixel Frog](https://pixelfrog-assets.itch.io/). - Which assets were used on this project.
 
