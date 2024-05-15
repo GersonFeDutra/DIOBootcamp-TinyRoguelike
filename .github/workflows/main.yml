@@ -68,9 +68,9 @@ jobs:
           # Your butler key (see https://itch.io/user/settings/api-keys)
           butler_key: ${{ secrets.ITCHIO_API_KEY }}
           # The itch username of the user that distributes the game
-          itch_user: "GersonFeDutra"
+          itch_user: GersonFeDutra
           # The name of the game in the project's url
-          itch_game: "Tiny Roguelike"
+          itch_game: tiny-roguelike
           # The game version number
           version: v1.${{ github.run_number }}
           # The files to push to itch.
@@ -90,4 +90,4 @@ jobs:
           # install directory
           #update_path: false
           # Which Butler version to install
-          butler_version: "latest"
+          butler_version: latest
