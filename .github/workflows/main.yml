@@ -1,0 +1,80 @@
+name: Export Godot Project
+
+# Controlls whether the workflow will run
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  # allow you to run this workflow manually from the Actions tab
+  #workflow_dispatch:
+
+# A workflow run is made of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: checkout
+        uses: actions/checkout@v3.3.0
+      
+      - name: export game
+        # You may pin to the exact commit or the version.
+        # Use latest version (see releases for all versions)
+        uses: firebelley/godot-export@v5.2.0
+        with:
+          # Defining all the required inputs
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.2/Godot_v4.2-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.2/Godot_v4.2-stable_export_templates.tpz
+          relative_project_path: ./
+          archive_output: true
+
+        # This release action has worked well for me. However, you can most likely use any release action of your choosing.
+        # https://github.com/ncipollo/release-action
+      - name: create release
+        uses: ncipollo/release-action@v1.12.0
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          generateReleaseNotes: true
+          tag: ${{ github.ref_name }}
+          artifacts: ${{ steps.export.outputs.archive_directory }}/*
+
+      - name: Butler to Itch
+        # You may pin to the exact commit or the version.
+        # uses: Ayowel/butler-to-itch@7b6338132fa31765869897ca9e40e6947dfe0f25
+        uses: Ayowel/butler-to-itch@v1.0.0
+        with:
+          # Whether to install Butler or to push a file.
+          # This may be used when you want to use Butler with custom
+          # commands.
+          action: "push"
+          # Where Butler should be installed.
+          install_dir: ~/.butler
+      
+          ###### Push options ######
+          # Your butler key (see https://itch.io/user/settings/api-keys)
+          butler_key: ${{ secrets.ITCHIO_API_KEY }}
+          # The itch username of the user that distributes the game
+          itch_user: "GersonFeDutra"
+          # The name of the game in the project's url
+          itch_game: "Tiny Roguelike"
+          # The game version number
+          version: "v1"
+          # The files to push to itch.
+          # File paths support globing and may start with a channel name.
+          files: ${{ steps.export.outputs.archive_directory }}/*
+          # If no channel is provided for a file, to generate one from the
+          # file's name.
+          auto_channel: true
+      
+          ###### Install options ######
+          # Whether to verify the downloaded Butler archive's signature
+          #check_signature: true
+          # Whether to update the PATH variable to include Butler's
+          # install directory
+          #update_path: false
+          # Which Butler version to install
+          butler_version: "latest"
