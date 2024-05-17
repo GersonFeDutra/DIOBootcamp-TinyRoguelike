@@ -19,7 +19,6 @@ func _ready() -> void:
 		)
 	else:
 		set_process_unhandled_input(false)
-		queue_free()
 
 
 func _unhandled_input(event: InputEvent) -> void:

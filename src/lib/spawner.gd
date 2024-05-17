@@ -28,6 +28,7 @@ func _ready() -> void:
 
 func spawn() -> void:
 	var next: Node = get_next().scene.instantiate()
+	rng.randomize()
 	
 	path_follow.progress_ratio = rng.randf()
 	next.global_position = path_follow.global_position
