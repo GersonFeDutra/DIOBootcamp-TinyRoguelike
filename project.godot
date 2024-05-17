@@ -18,23 +18,18 @@ config/icon="res://icon.png"
 run/ignore_damage=false
 run/time_scale=1.0
 run/first_play=true
-run/enable_screenshot=true
+run/enable_screenshot=false
 
 [autoload]
 
 ControllsGuide="*res://src/autoload/controlls_guide.tscn"
 DevMode="*res://src/autoload/DevMode.tscn"
-LocalizationManager="*res://addons/localization_editor/LocalizationManager.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://addons/Tiny Swords/UI/Pointers/cursor.tres"
 mouse_cursor/custom_image_hotspot=Vector2(2, 2)
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/localization_editor/plugin.cfg")
 
 [file_customization]
 
