@@ -3,6 +3,10 @@ extends CenterContainer
 @export var start: PackedScene
 
 
+func _ready() -> void:
+	%NewGame.grab_focus()
+
+
 func _on_new_game_pressed() -> void:
 	get_tree().change_scene_to_packed(start)
 	ControllsGuide.start()

@@ -25,8 +25,9 @@ func _ready() -> void:
 
 
 func _switch_attack_animation(to: Weapon) -> void:
-	state_machine.states[behavior.ChaseStates.ATTACKING] = \
-			weapon_to_state[to]
+	if state_machine:
+		state_machine.states[behavior.ChaseStates.ATTACKING] = \
+				weapon_to_state[to]
 
 
 func play_attack_sfx() -> void:

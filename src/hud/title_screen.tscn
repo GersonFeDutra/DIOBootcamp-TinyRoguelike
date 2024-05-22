@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://n73ltbs6wnqm"]
+[gd_scene load_steps=52 format=3 uid="uid://n73ltbs6wnqm"]
 
 [ext_resource type="Texture2D" uid="uid://shlxdgj2icex" path="res://addons/Tiny Swords/UI/Ribbons/Ribbon_Yellow_3Slides.png" id="1_c2p2f"]
 [ext_resource type="Script" path="res://src/hud/title_screen.gd" id="1_r36wr"]
@@ -296,27 +296,45 @@ shadow_offset = Vector2(0.1, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_abv6q"]
 content_margin_left = 6.0
 content_margin_right = 6.0
-bg_color = Color(0.59, 0.544767, 0.3186, 0.713726)
+bg_color = Color(0.59, 0.571907, 0.3186, 0.713726)
 skew = Vector2(0.4, 0)
 border_width_left = 4
-border_color = Color(0.69, 0.656995, 0.4071, 0.741176)
+border_color = Color(0.69, 0.66171, 0.4071, 0.741176)
 corner_radius_top_left = 6
 expand_margin_left = 4.0
-shadow_color = Color(0.45, 0.36495, 0.261, 0.529412)
+shadow_color = Color(0.45, 0.4311, 0.261, 0.529412)
 shadow_size = 2
 shadow_offset = Vector2(0.1, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34007"]
 content_margin_left = 6.0
 content_margin_right = 6.0
-bg_color = Color(0.59, 0.404543, 0.3186, 0.713726)
+bg_color = Color(0.3132, 0.58, 0.504407, 0.713726)
 skew = Vector2(0.5, 0)
 border_width_left = 4
-border_color = Color(0.69, 0.49197, 0.4071, 0.741176)
+border_color = Color(0.4071, 0.69, 0.562695, 0.741176)
 corner_radius_top_left = 6
 expand_margin_left = 4.0
-shadow_color = Color(0.45, 0.3114, 0.261, 0.529412)
+shadow_color = Color(0.261, 0.45, 0.37755, 0.529412)
 shadow_size = 2
+shadow_offset = Vector2(0.1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8tmbu"]
+content_margin_left = 6.0
+content_margin_right = 6.0
+bg_color = Color(0.317647, 0.588235, 0.352941, 0.196078)
+draw_center = false
+skew = Vector2(0.333, 0)
+border_width_left = 4
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4071, 0.69, 0.43539, 0.811765)
+border_blend = true
+corner_radius_top_left = 6
+expand_margin_left = 4.0
+shadow_color = Color(0.4185, 0.45, 0.261, 0.529412)
+shadow_size = 3
 shadow_offset = Vector2(0.1, 0)
 
 [node name="TitleScreen" type="CenterContainer"]
@@ -386,33 +404,55 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="NewGame" type="Button" parent="VBoxContainer/Menu/Buttons"]
+unique_name_in_owner = true
 layout_mode = 2
+focus_neighbor_left = NodePath("../Exit")
+focus_neighbor_top = NodePath("../Exit")
+focus_neighbor_right = NodePath("../Credits")
+focus_neighbor_bottom = NodePath("../Credits")
+focus_next = NodePath("../Credits")
+focus_previous = NodePath("../Exit")
 theme_override_fonts/font = SubResource("SystemFont_6ehy0")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_2lhyi")
 theme_override_styles/hover = SubResource("StyleBoxFlat_abv6q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_34007")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8tmbu")
 text = "NEW_GAME"
-alignment = 0
-
-[node name="Exit" type="Button" parent="VBoxContainer/Menu/Buttons"]
-layout_mode = 2
-theme_override_fonts/font = SubResource("SystemFont_6ehy0")
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = SubResource("StyleBoxFlat_2lhyi")
-theme_override_styles/hover = SubResource("StyleBoxFlat_abv6q")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_34007")
-text = "EXIT"
 alignment = 0
 
 [node name="Credits" type="Button" parent="VBoxContainer/Menu/Buttons"]
 layout_mode = 2
+focus_neighbor_left = NodePath("../NewGame")
+focus_neighbor_top = NodePath("../NewGame")
+focus_neighbor_right = NodePath("../Exit")
+focus_neighbor_bottom = NodePath("../Exit")
+focus_next = NodePath("../Exit")
+focus_previous = NodePath("../NewGame")
 theme_override_fonts/font = SubResource("SystemFont_6ehy0")
 theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_2lhyi")
 theme_override_styles/hover = SubResource("StyleBoxFlat_abv6q")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_34007")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8tmbu")
 text = "CREDITS"
+alignment = 0
+
+[node name="Exit" type="Button" parent="VBoxContainer/Menu/Buttons"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Credits")
+focus_neighbor_top = NodePath("../Credits")
+focus_neighbor_right = NodePath("../NewGame")
+focus_neighbor_bottom = NodePath("../NewGame")
+focus_next = NodePath("../NewGame")
+focus_previous = NodePath("../Credits")
+theme_override_fonts/font = SubResource("SystemFont_6ehy0")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = SubResource("StyleBoxFlat_2lhyi")
+theme_override_styles/hover = SubResource("StyleBoxFlat_abv6q")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_34007")
+theme_override_styles/focus = SubResource("StyleBoxFlat_8tmbu")
+text = "EXIT"
 alignment = 0
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
@@ -420,5 +460,5 @@ stream = ExtResource("4_3083r")
 autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Menu/Buttons/NewGame" to="." method="_on_new_game_pressed"]
-[connection signal="pressed" from="VBoxContainer/Menu/Buttons/Exit" to="." method="_on_exit_pressed"]
 [connection signal="pressed" from="VBoxContainer/Menu/Buttons/Credits" to="." method="_on_credits_pressed"]
+[connection signal="pressed" from="VBoxContainer/Menu/Buttons/Exit" to="." method="_on_exit_pressed"]

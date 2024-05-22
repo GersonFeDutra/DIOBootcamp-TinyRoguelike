@@ -650,5 +650,3 @@ delay = 0.5
 [node name="AttackSfx" type="AudioStreamPlayer2D" parent="." index="11"]
 stream = ExtResource("6_s3fle")
 pitch_scale = 2.0
-
-[connection signal="hurted" from="HurtArea" to="ChaseBehavior" method="_on_hurted"]

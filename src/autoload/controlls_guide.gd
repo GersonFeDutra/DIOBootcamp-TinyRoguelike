@@ -1,9 +1,17 @@
 extends Node2D
 
+const ResourceSpawn = preload("res://src/fx/spawn/resource.gd")
+var target_spawn: ResourceSpawn
+var intact_remote: RemoteTransform2D
+
 @export var fade_threshhold: float = .1
 @export var fade_intensity: float = 0.01
-@onready var arrow_keys: Node2D = $ArrowKeys
+
+@onready var arrow_keys: Node2D = %ArrowKeys
 @export var anchor_distance: float = -128.
+
+var _was_interact_guide_spawned: bool = false
+@onready var interact_keys: Node2D = %InteractKeys
 
 var faded_keys: int
 var is_finished: bool
@@ -44,10 +52,13 @@ func _set_display_visibility(from_device: int, value: bool) -> void:
 	match from_device:
 		DeviceDetector.JoypadType.XBOX:
 			%XboxSeriesXB.visible = value
+			%XboxSeriesXY.visible = value
 		DeviceDetector.JoypadType.SONY:
 			%Ps4Circle.visible = value
+			%Ps4Triangle.visible = value
 		DeviceDetector.JoypadType.NINTENDO:
 			%SwitchA.visible = value
+			%SwitchX.visible = value
 		DeviceDetector.JoypadType.GENERIC:
 			for child in %Console.get_children():
 				child.visible = value
@@ -60,33 +71,31 @@ func setup() -> void:
 	set_process_input(true)
 	follow_playable()
 	set_playable_can_attack(false)
-	%ArrowKeys.get_node("AnimationPlayer").play(&"fade_in")
+	_guide_fade_in(%ArrowKeys)
 
 
 func skip() -> void:
 	if is_finished:
 		return
 	set_playable_can_attack(true)
-	finish()
+	_finish()
 
 
-func finish() -> void:
+func _finish() -> void:
 	unfollow_playable()
 	is_finished = true
 	set_process_input(false)
+
+
+func finish() -> void:
+	_finish()
 	for child in get_children(true):
 		child.queue_free()
 
 
 func follow_playable() -> void:
 	for playable in get_tree().get_nodes_in_group(&"playable"):
-		var remote := RemoteTransform2D.new()
-		remote.name = "ControllsGuideRemoteTransform"
-		remote.position.y += anchor_distance
-		remote.update_rotation = false
-		remote.update_scale = false
-		playable.add_child(remote)
-		remote.remote_path = remote.get_path_to(self)
+		_attach_new_remote(playable, $PlayerAnchor)
 		break
 
 
@@ -112,12 +121,9 @@ func _input(event: InputEvent) -> void:
 	action_fade_key(event, &"move_down", %ArrowDownKey)
 	
 	if faded_keys == 4 and event.is_action(&"attack"):
-		var player: AnimationPlayer = %AttackKeys.get_node("AnimationPlayer")
-		player.play_backwards(&"fade_in")
 		faded_keys += 1
-		
-		await player.animation_finished
-		finish()
+		await _guide_fade_out(%AttackKeys)
+		_finish()
 
 
 func action_fade_key(
@@ -130,11 +136,52 @@ func action_fade_key(
 			update_key_visibility(key)
 
 
+func _guide_fade_in(guide: Node2D) -> void:
+	print(guide.name)
+	guide.get_node(^"AnimationPlayer").play(&"fade_in")
+
+
+func _guide_fade_out(guide: Node2D) -> void:
+	var player: AnimationPlayer = guide.get_node(^"AnimationPlayer")
+	player.play_backwards(&"fade_in")
+	
+	await player.animation_finished
+	guide.queue_free()
+
+
 func update_key_visibility(key: Node2D) -> void:
 	if key.visible:
 		faded_keys += 1
 		if faded_keys == 4:
 			set_playable_can_attack(true)
 			%AttackKeys.get_node("AnimationPlayer").play(&"fade_in")
-			fade_intensity *= 10.
 	key.visible = false
+
+
+func attach_interact_guide(node: ResourceSpawn) -> void:
+	if _was_interact_guide_spawned:
+		return
+	_was_interact_guide_spawned = true
+	
+	await get_tree().process_frame
+	target_spawn = node
+	intact_remote = _attach_new_remote(node, interact_keys)
+	interact_keys.visible = true
+	_guide_fade_in(%InteractKeys)
+
+
+func _attach_new_remote(to: Node2D, target: Node2D) -> RemoteTransform2D:
+	var remote := RemoteTransform2D.new()
+	remote.name = &"ControllsGuideRemoteTransform"
+	remote.position.y += anchor_distance
+	remote.update_rotation = false
+	remote.update_scale = false
+	to.add_child(remote, false)
+	remote.remote_path = remote.get_path_to(target)
+	return remote
+
+
+func on_resource_collected(spawn: ResourceSpawn) -> void:
+	if spawn == target_spawn:
+		await _guide_fade_out(%InteractKeys)
+		#intact_remote.queue_free() # Already freed by owner

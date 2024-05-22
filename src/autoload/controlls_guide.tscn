@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://c28j7kadkp0y1"]
+[gd_scene load_steps=61 format=3 uid="uid://c28j7kadkp0y1"]
 
 [ext_resource type="Script" path="res://src/autoload/controlls_guide.gd" id="1_re3y2"]
 [ext_resource type="Texture2D" uid="uid://byoar2xmxatd2" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Light/A_Key_Light.png" id="2_3asuh"]
@@ -24,6 +24,12 @@
 [ext_resource type="Texture2D" uid="uid://blcwbqqaiwkba" path="res://addons/Xelu_Free_Controller&Key_Prompts/PS4/PS4_Circle.png" id="17_5a8nm"]
 [ext_resource type="Texture2D" uid="uid://ci1hv256j877g" path="res://addons/Xelu_Free_Controller&Key_Prompts/Xbox Series X/XboxSeriesX_Diagram_Flat.png" id="18_efvia"]
 [ext_resource type="Texture2D" uid="uid://xtshp5bjhdc6" path="res://addons/Xelu_Free_Controller&Key_Prompts/Xbox One/XboxOne_B.png" id="19_71o1w"]
+[ext_resource type="Texture2D" uid="uid://v3qv2wm7rnfv" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Light/Mouse_Right_Key_Light.png" id="25_bo1j3"]
+[ext_resource type="Texture2D" uid="uid://0m5lkfaiu3cu" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Light/Q_Key_Light.png" id="26_cend8"]
+[ext_resource type="Texture2D" uid="uid://cxegku8fg2bkm" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Dark/Q_Key_Dark.png" id="27_1mv3q"]
+[ext_resource type="Texture2D" uid="uid://d0o07vcqniqg5" path="res://addons/Xelu_Free_Controller&Key_Prompts/PS4/PS4_Triangle.png" id="28_2cbx3"]
+[ext_resource type="Texture2D" uid="uid://jo1rg5jmv41m" path="res://addons/Xelu_Free_Controller&Key_Prompts/Switch/Switch_X.png" id="28_jalbn"]
+[ext_resource type="Texture2D" uid="uid://cj2twuqwavb0e" path="res://addons/Xelu_Free_Controller&Key_Prompts/Xbox Series X/XboxSeriesX_Y.png" id="29_vkssr"]
 
 [sub_resource type="AnimatedTexture" id="AnimatedTexture_ssgm8"]
 frames = 2
@@ -86,7 +92,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ArrowKeys:visible")
+tracks/0/path = NodePath("PlayerAnchor/ArrowKeys:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -98,7 +104,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ArrowKeys:modulate")
+tracks/1/path = NodePath("PlayerAnchor/ArrowKeys:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -113,7 +119,7 @@ resource_name = "fade_in"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ArrowKeys:visible")
+tracks/0/path = NodePath("PlayerAnchor/ArrowKeys:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -125,7 +131,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ArrowKeys:modulate")
+tracks/1/path = NodePath("PlayerAnchor/ArrowKeys:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -155,12 +161,12 @@ frame_0/duration = 0.5
 frame_1/texture = ExtResource("13_i00lh")
 frame_1/duration = 0.3
 
-[sub_resource type="Animation" id="Animation_gf2ka"]
+[sub_resource type="Animation" id="Animation_tq5bc"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%SwitchA:modulate")
+tracks/0/path = NodePath("./Console/SwitchA/Button:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -172,7 +178,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%Ps4Circle:modulate")
+tracks/1/path = NodePath("./Console/Ps4Circle/Button:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -184,7 +190,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("%XboxSeriesXB:modulate")
+tracks/2/path = NodePath("./Console/XboxSeriesXB/Button:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -194,14 +200,14 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_81w21"]
+[sub_resource type="Animation" id="Animation_sgx07"]
 resource_name = "press_loop"
 length = 0.8
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("%SwitchA:modulate")
+tracks/0/path = NodePath("./Console/SwitchA:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -213,7 +219,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("%Ps4Circle:modulate")
+tracks/1/path = NodePath("./Console/Ps4Circle/Button:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -225,7 +231,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("%XboxSeriesXB:modulate")
+tracks/2/path = NodePath("./Console/XboxSeriesXB/Button:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -235,10 +241,10 @@ tracks/2/keys = {
 "values": [Color(1, 1, 1, 1), Color(0.497474, 0.497474, 0.497474, 1)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xd4c3"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wp2hg"]
 _data = {
-"RESET": SubResource("Animation_gf2ka"),
-"press_loop": SubResource("Animation_81w21")
+"RESET": SubResource("Animation_tq5bc"),
+"press_loop": SubResource("Animation_sgx07")
 }
 
 [sub_resource type="SystemFont" id="SystemFont_e5myo"]
@@ -318,6 +324,115 @@ tracks/1/keys = {
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cxhml"]
+_data = {
+"RESET": SubResource("Animation_dx18p"),
+"fade_in": SubResource("Animation_80i7g")
+}
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_cr5qk"]
+load_path = "res://.godot/imported/Blank_White_Mouse.png-0d369d32ff9c54c3fa35a86ac511b574.ctex"
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_0xylf"]
+frames = 2
+frame_0/texture = SubResource("CompressedTexture2D_cr5qk")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("25_bo1j3")
+frame_1/duration = 0.3
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_d7fmq"]
+frames = 2
+frame_0/texture = ExtResource("26_cend8")
+frame_0/duration = 0.5
+frame_1/texture = ExtResource("27_1mv3q")
+frame_1/duration = 0.3
+
+[sub_resource type="Animation" id="Animation_28q2e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("./Console/SwitchX/Button:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("./Console/Ps4Triangle/Button:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("./Console/XboxSeriesXY/Button:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vba8e"]
+resource_name = "press_loop"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("./Console/SwitchX/Button:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.497474, 0.497474, 0.497474, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("./Console/Ps4Triangle/Button:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.497474, 0.497474, 0.497474, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("./Console/XboxSeriesXY/Button:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.497474, 0.497474, 0.497474, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ubct8"]
+_data = {
+"RESET": SubResource("Animation_28q2e"),
+"press_loop": SubResource("Animation_vba8e")
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t24b2"]
 _data = {
 "RESET": SubResource("Animation_dx18p"),
@@ -330,136 +445,145 @@ script = ExtResource("1_re3y2")
 fade_threshhold = 0.2
 fade_intensity = 0.15
 
-[node name="ArrowKeys" type="Node2D" parent="."]
+[node name="PlayerAnchor" type="Node2D" parent="."]
+
+[node name="ArrowKeys" type="Node2D" parent="PlayerAnchor"]
 unique_name_in_owner = true
 visible = false
 scale = Vector2(0.5, 0.5)
 
-[node name="ArrowLeftKey" type="Sprite2D" parent="ArrowKeys"]
+[node name="ArrowLeftKey" type="Sprite2D" parent="PlayerAnchor/ArrowKeys"]
 unique_name_in_owner = true
 position = Vector2(-76, -1)
 texture = SubResource("AnimatedTexture_ssgm8")
 
-[node name="SwitchDpadLeft" type="Sprite2D" parent="ArrowKeys/ArrowLeftKey"]
+[node name="SwitchDpadLeft" type="Sprite2D" parent="PlayerAnchor/ArrowKeys/ArrowLeftKey"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(-20, 427)
 texture = SubResource("AnimatedTexture_qb12y")
 
-[node name="ArrowDownKey" type="Sprite2D" parent="ArrowKeys"]
+[node name="ArrowDownKey" type="Sprite2D" parent="PlayerAnchor/ArrowKeys"]
 unique_name_in_owner = true
 position = Vector2(0, -1)
 texture = SubResource("AnimatedTexture_5vr5k")
 
-[node name="SwitchDpadDown" type="Sprite2D" parent="ArrowKeys/ArrowDownKey"]
+[node name="SwitchDpadDown" type="Sprite2D" parent="PlayerAnchor/ArrowKeys/ArrowDownKey"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(0, 427)
 texture = SubResource("AnimatedTexture_0e84b")
 
-[node name="ArrowRightKey" type="Sprite2D" parent="ArrowKeys"]
+[node name="ArrowRightKey" type="Sprite2D" parent="PlayerAnchor/ArrowKeys"]
 unique_name_in_owner = true
 position = Vector2(76, -1)
 texture = SubResource("AnimatedTexture_0etjx")
 
-[node name="SwitchDpadRight" type="Sprite2D" parent="ArrowKeys/ArrowRightKey"]
+[node name="SwitchDpadRight" type="Sprite2D" parent="PlayerAnchor/ArrowKeys/ArrowRightKey"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(18, 425)
 texture = SubResource("AnimatedTexture_5tili")
 
-[node name="ArrowUpKey" type="Sprite2D" parent="ArrowKeys"]
+[node name="ArrowUpKey" type="Sprite2D" parent="PlayerAnchor/ArrowKeys"]
 unique_name_in_owner = true
 position = Vector2(-1, -75)
 texture = SubResource("AnimatedTexture_d4vb3")
 
-[node name="SwitchDpadUp" type="Sprite2D" parent="ArrowKeys/ArrowUpKey"]
+[node name="SwitchDpadUp" type="Sprite2D" parent="PlayerAnchor/ArrowKeys/ArrowUpKey"]
 unique_name_in_owner = true
 visible = false
 position = Vector2(1, 403)
 texture = SubResource("AnimatedTexture_hsun8")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ArrowKeys"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerAnchor/ArrowKeys"]
+root_node = NodePath("../../..")
 libraries = {
 "": SubResource("AnimationLibrary_4d3d2")
 }
 speed_scale = 0.5
 
-[node name="AttackKeys" type="Node2D" parent="."]
+[node name="AttackKeys" type="Node2D" parent="PlayerAnchor"]
 unique_name_in_owner = true
 visible = false
 
-[node name="CenterContainer" type="CenterContainer" parent="AttackKeys"]
+[node name="CenterContainer" type="CenterContainer" parent="PlayerAnchor/AttackKeys"]
 custom_minimum_size = Vector2(928, 100)
 offset_right = 204.0
 offset_bottom = 100.0
 scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(-464, -50)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AttackKeys/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="PlayerAnchor/AttackKeys/CenterContainer"]
 layout_mode = 2
 
-[node name="LeftMouseKey" type="TextureRect" parent="AttackKeys/CenterContainer/HBoxContainer"]
+[node name="LeftMouseKey" type="TextureRect" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AnimatedTexture_8h1el")
 
-[node name="EKey" type="TextureRect" parent="AttackKeys/CenterContainer/HBoxContainer"]
+[node name="EKey" type="TextureRect" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer"]
 layout_mode = 2
 texture = SubResource("AnimatedTexture_dbxhw")
 
-[node name="Console" type="HBoxContainer" parent="AttackKeys/CenterContainer/HBoxContainer"]
+[node name="Console" type="HBoxContainer" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 alignment = 2
 
-[node name="SwitchIcon" type="TextureRect" parent="AttackKeys/CenterContainer/HBoxContainer/Console"]
+[node name="SwitchA" type="HBoxContainer" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer/Console"]
+unique_name_in_owner = true
 visible = false
+modulate = Color(0.497474, 0.497474, 0.497474, 1)
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer/Console/SwitchA"]
 self_modulate = Color(0.164706, 0.156863, 0.188235, 1)
 layout_mode = 2
 texture = ExtResource("14_ndnv5")
 
-[node name="SwitchA" type="TextureRect" parent="AttackKeys/CenterContainer/HBoxContainer/Console"]
-unique_name_in_owner = true
-visible = false
+[node name="Button" type="TextureRect" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer/Console/SwitchA"]
 layout_mode = 2
 texture = ExtResource("15_r6mdi")
 
-[node name="Ps4Diagram" type="TextureRect" parent="AttackKeys/CenterContainer/HBoxContainer/Console"]
+[node name="Ps4Circle" type="HBoxContainer" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer/Console"]
+unique_name_in_owner = true
 visible = false
+layout_mode = 2
+
+[node name="Diagram" type="TextureRect" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer/Console/Ps4Circle"]
 self_modulate = Color(0.34, 0.34, 0.34, 1)
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 texture = ExtResource("16_u2f4a")
 expand_mode = 1
 
-[node name="Ps4Circle" type="TextureRect" parent="AttackKeys/CenterContainer/HBoxContainer/Console"]
-unique_name_in_owner = true
-visible = false
+[node name="Button" type="TextureRect" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer/Console/Ps4Circle"]
 layout_mode = 2
 texture = ExtResource("17_5a8nm")
 
-[node name="XboxSeriesXDiagram" type="TextureRect" parent="AttackKeys/CenterContainer/HBoxContainer/Console"]
+[node name="XboxSeriesXB" type="HBoxContainer" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer/Console"]
+unique_name_in_owner = true
 visible = false
+layout_mode = 2
+
+[node name="Diagram" type="TextureRect" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer/Console/XboxSeriesXB"]
 self_modulate = Color(0.34, 0.34, 0.34, 1)
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 texture = ExtResource("18_efvia")
 expand_mode = 1
 
-[node name="XboxSeriesXB" type="TextureRect" parent="AttackKeys/CenterContainer/HBoxContainer/Console"]
-unique_name_in_owner = true
-visible = false
+[node name="Button" type="TextureRect" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer/Console/XboxSeriesXB"]
 layout_mode = 2
 texture = ExtResource("19_71o1w")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AttackKeys/CenterContainer/HBoxContainer"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerAnchor/AttackKeys/CenterContainer/HBoxContainer"]
 libraries = {
-"": SubResource("AnimationLibrary_xd4c3")
+"": SubResource("AnimationLibrary_wp2hg")
 }
 autoplay = "press_loop"
 
-[node name="Label" type="Label" parent="AttackKeys"]
+[node name="Label" type="Label" parent="PlayerAnchor/AttackKeys"]
 offset_left = -42.0
 offset_top = 30.0
 offset_right = 45.0
@@ -467,7 +591,99 @@ offset_bottom = 59.0
 text = "ATTACK"
 label_settings = SubResource("LabelSettings_f0vc3")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AttackKeys"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="PlayerAnchor/AttackKeys"]
+libraries = {
+"": SubResource("AnimationLibrary_cxhml")
+}
+speed_scale = 0.5
+
+[node name="InteractKeys" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+
+[node name="CenterContainer" type="CenterContainer" parent="InteractKeys"]
+custom_minimum_size = Vector2(928, 100)
+offset_right = 204.0
+offset_bottom = 100.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(-464, -50)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="InteractKeys/CenterContainer"]
+layout_mode = 2
+
+[node name="RightMouseKey" type="TextureRect" parent="InteractKeys/CenterContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_0xylf")
+
+[node name="QKey" type="TextureRect" parent="InteractKeys/CenterContainer/HBoxContainer"]
+layout_mode = 2
+texture = SubResource("AnimatedTexture_d7fmq")
+
+[node name="Console" type="HBoxContainer" parent="InteractKeys/CenterContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="SwitchX" type="HBoxContainer" parent="InteractKeys/CenterContainer/HBoxContainer/Console"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="SwitchIcon" type="TextureRect" parent="InteractKeys/CenterContainer/HBoxContainer/Console/SwitchX"]
+self_modulate = Color(0.164706, 0.156863, 0.188235, 1)
+layout_mode = 2
+texture = ExtResource("14_ndnv5")
+
+[node name="Button" type="TextureRect" parent="InteractKeys/CenterContainer/HBoxContainer/Console/SwitchX"]
+layout_mode = 2
+texture = ExtResource("28_jalbn")
+
+[node name="Ps4Triangle" type="HBoxContainer" parent="InteractKeys/CenterContainer/HBoxContainer/Console"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Diagram" type="TextureRect" parent="InteractKeys/CenterContainer/HBoxContainer/Console/Ps4Triangle"]
+self_modulate = Color(0.34, 0.34, 0.34, 1)
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+texture = ExtResource("16_u2f4a")
+expand_mode = 1
+
+[node name="Button" type="TextureRect" parent="InteractKeys/CenterContainer/HBoxContainer/Console/Ps4Triangle"]
+layout_mode = 2
+texture = ExtResource("28_2cbx3")
+
+[node name="XboxSeriesXY" type="HBoxContainer" parent="InteractKeys/CenterContainer/HBoxContainer/Console"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="Diagram" type="TextureRect" parent="InteractKeys/CenterContainer/HBoxContainer/Console/XboxSeriesXY"]
+self_modulate = Color(0.34, 0.34, 0.34, 1)
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+texture = ExtResource("18_efvia")
+expand_mode = 1
+
+[node name="Button" type="TextureRect" parent="InteractKeys/CenterContainer/HBoxContainer/Console/XboxSeriesXY"]
+layout_mode = 2
+texture = ExtResource("29_vkssr")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InteractKeys/CenterContainer/HBoxContainer"]
+libraries = {
+"": SubResource("AnimationLibrary_ubct8")
+}
+autoplay = "press_loop"
+
+[node name="Label" type="Label" parent="InteractKeys"]
+offset_left = -58.0
+offset_top = 30.0
+offset_right = 58.0
+offset_bottom = 59.0
+text = "INTERACT"
+label_settings = SubResource("LabelSettings_f0vc3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InteractKeys"]
 libraries = {
 "": SubResource("AnimationLibrary_t24b2")
 }

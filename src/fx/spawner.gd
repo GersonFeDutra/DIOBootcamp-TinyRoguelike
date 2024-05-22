@@ -15,13 +15,15 @@ func _spawn_fx(on: Node, flip_h: bool) -> void:
 	var instance := fx.instantiate()
 	instance.global_position = global_position
 	
-	if cry and instance.has_node(^"CrySFX"):
+	if instance.has_node(^"CrySFX"):
 		var mixer = instance.get_node(^"CrySFX")
-		mixer.stream = cry
-		mixer.min_pitch = cry_pitch_min
-		mixer.max_pitch = cry_pitch_max
+		
 		if disable_cry:
 			mixer.queue_free()
+		elif cry:
+			mixer.stream = cry
+			mixer.min_pitch = cry_pitch_min
+			mixer.max_pitch = cry_pitch_max
 	
 	_add_instance(instance, on, flip_h)
 

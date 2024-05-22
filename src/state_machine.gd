@@ -53,7 +53,8 @@ func _get_configuration_warnings() -> PackedStringArray:
 
 
 func attach_waiting_states() -> void:
-	for state in states.values():
+	for _state in states.values():
+		var state := _state as State
 		if state.transition == State.TransitionMode.WAIT_FINISH:
 			state.waiting_state_finished.connect(trigger_next_state)
 

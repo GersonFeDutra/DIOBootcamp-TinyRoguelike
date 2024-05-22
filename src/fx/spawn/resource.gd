@@ -9,6 +9,7 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		for body in $Area2D.get_overlapping_bodies():
 			_collect_to(body)
+			ControllsGuide.on_resource_collected(self)
 			break
 
 

@@ -505,9 +505,6 @@ footstep_sfx_pitch_max = 1.5
 slash_sfx_pitch_min = 1.5
 slash_sfx_pitch_max = 2.5
 
-[node name="DeathFxSpawner" parent="Player" index="4"]
-disable_cry = false
-
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
 
