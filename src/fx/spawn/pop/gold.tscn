@@ -133,6 +133,7 @@ theme_override_fonts/normal_font = SubResource("SystemFont_nr43r")
 theme_override_font_sizes/normal_font_size = 24
 bbcode_enabled = true
 text = "[center][wave freq=6. amp=50]XXXX[/wave][/center]"
+scroll_active = false
 autowrap_mode = 0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="RichTextLabel"]

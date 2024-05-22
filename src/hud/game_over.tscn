@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://dgnehkxpwul3n"]
+[gd_scene load_steps=36 format=3 uid="uid://dgnehkxpwul3n"]
 
 [ext_resource type="Script" path="res://src/hud/game_over.gd" id="1_nmn42"]
 [ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="2_1jlqy"]
@@ -30,17 +30,21 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 region_rect = Rect2(0, 0, 192, 64)
 
-[sub_resource type="SystemFont" id="SystemFont_bxnir"]
+[sub_resource type="SystemFont" id="SystemFont_cic3w"]
 font_names = PackedStringArray("Serif")
+
+[sub_resource type="SystemFont" id="SystemFont_bxnir"]
+fallbacks = Array[Font]([SubResource("SystemFont_cic3w")])
+font_names = PackedStringArray("Georgia")
 subpixel_positioning = 0
 
-[sub_resource type="SystemFont" id="SystemFont_f7rms"]
+[sub_resource type="SystemFont" id="SystemFont_aooi1"]
 fallbacks = Array[Font]([SubResource("SystemFont_bxnir")])
 font_names = PackedStringArray("Fantasy")
 subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_c1tpe"]
-font = SubResource("SystemFont_f7rms")
+font = SubResource("SystemFont_aooi1")
 font_size = 60
 font_color = Color(0.937255, 0.780392, 0.682353, 1)
 

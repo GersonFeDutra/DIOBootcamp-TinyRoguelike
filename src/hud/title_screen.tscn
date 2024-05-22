@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://n73ltbs6wnqm"]
+[gd_scene load_steps=54 format=3 uid="uid://n73ltbs6wnqm"]
 
 [ext_resource type="Texture2D" uid="uid://shlxdgj2icex" path="res://addons/Tiny Swords/UI/Ribbons/Ribbon_Yellow_3Slides.png" id="1_c2p2f"]
 [ext_resource type="Script" path="res://src/hud/title_screen.gd" id="1_r36wr"]
@@ -269,8 +269,20 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 region_rect = Rect2(0, 0, 192, 64)
 
-[sub_resource type="SystemFont" id="SystemFont_bxnir"]
+[sub_resource type="GDScript" id="GDScript_lwc6u"]
+script/source = "extends Panel
+
+
+func _ready() -> void:
+	custom_minimum_size = $Label.size * $Label.scale
+"
+
+[sub_resource type="SystemFont" id="SystemFont_cic3w"]
 font_names = PackedStringArray("Serif")
+
+[sub_resource type="SystemFont" id="SystemFont_bxnir"]
+fallbacks = Array[Font]([SubResource("SystemFont_cic3w")])
+font_names = PackedStringArray("Georgia")
 subpixel_positioning = 0
 
 [sub_resource type="SystemFont" id="SystemFont_gb1um"]
@@ -356,7 +368,6 @@ custom_minimum_size = Vector2(570, 142.5)
 layout_mode = 2
 
 [node name="TitlePanel" type="Panel" parent="VBoxContainer/Title"]
-custom_minimum_size = Vector2(380, 95)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -372,6 +383,7 @@ grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(196, 43)
 theme_override_styles/panel = SubResource("StyleBoxTexture_o4igq")
+script = SubResource("GDScript_lwc6u")
 
 [node name="Label" type="Label" parent="VBoxContainer/Title/TitlePanel"]
 layout_mode = 1
