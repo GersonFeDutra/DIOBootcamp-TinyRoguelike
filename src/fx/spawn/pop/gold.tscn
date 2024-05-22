@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://govuwua7gojc"]
+[gd_scene load_steps=8 format=3 uid="uid://govuwua7gojc"]
+
+[ext_resource type="AudioStream" uid="uid://dss3jieq8c36v" path="res://addons/FreeSFX/GameSFX/PickUp/Retro PickUp Coin 04.wav" id="1_swimf"]
 
 [sub_resource type="SystemFont" id="SystemFont_e5myo"]
 font_names = PackedStringArray("Monospace")
@@ -112,7 +114,7 @@ _data = {
 "pop": SubResource("Animation_5qdvj")
 }
 
-[node name="DamagePop" type="Node2D"]
+[node name="GoldPop" type="Node2D"]
 z_index = 100
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
@@ -139,3 +141,7 @@ libraries = {
 }
 autoplay = "pop"
 speed_scale = 0.5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_swimf")
+autoplay = true

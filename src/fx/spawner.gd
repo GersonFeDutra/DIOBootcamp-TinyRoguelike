@@ -1,6 +1,10 @@
 extends Marker2D
 
 @export var fx: PackedScene
+@export var cry: AudioStream
+@export var cry_pitch_min: float = 1.
+@export var cry_pitch_max: float = 1.5
+@export var disable_cry: bool = false
 
 
 func spawn(on: Node, flip_h: bool) -> void:
@@ -10,6 +14,15 @@ func spawn(on: Node, flip_h: bool) -> void:
 func _spawn_fx(on: Node, flip_h: bool) -> void:
 	var instance := fx.instantiate()
 	instance.global_position = global_position
+	
+	if cry and instance.has_node(^"CrySFX"):
+		var mixer = instance.get_node(^"CrySFX")
+		mixer.stream = cry
+		mixer.min_pitch = cry_pitch_min
+		mixer.max_pitch = cry_pitch_max
+		if disable_cry:
+			mixer.queue_free()
+	
 	_add_instance(instance, on, flip_h)
 
 

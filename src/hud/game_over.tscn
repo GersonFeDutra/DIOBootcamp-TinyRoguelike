@@ -34,13 +34,13 @@ region_rect = Rect2(0, 0, 192, 64)
 font_names = PackedStringArray("Serif")
 subpixel_positioning = 0
 
-[sub_resource type="SystemFont" id="SystemFont_gb1um"]
+[sub_resource type="SystemFont" id="SystemFont_f7rms"]
 fallbacks = Array[Font]([SubResource("SystemFont_bxnir")])
 font_names = PackedStringArray("Fantasy")
 subpixel_positioning = 0
 
-[sub_resource type="LabelSettings" id="LabelSettings_0vmnp"]
-font = SubResource("SystemFont_gb1um")
+[sub_resource type="LabelSettings" id="LabelSettings_c1tpe"]
+font = SubResource("SystemFont_f7rms")
 font_size = 60
 font_color = Color(0.937255, 0.780392, 0.682353, 1)
 
@@ -654,7 +654,7 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(112, 31)
 text = "GAME_OVER"
-label_settings = SubResource("LabelSettings_0vmnp")
+label_settings = SubResource("LabelSettings_c1tpe")
 horizontal_alignment = 1
 vertical_alignment = 1
 

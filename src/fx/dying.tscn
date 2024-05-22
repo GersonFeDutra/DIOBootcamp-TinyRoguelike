@@ -1,7 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://dw5tps5su811h"]
+[gd_scene load_steps=20 format=3 uid="uid://dw5tps5su811h"]
 
 [ext_resource type="Texture2D" uid="uid://cnukr454gkq3p" path="res://addons/Tiny Swords/Factions/Knights/Troops/Dead/Dead.png" id="1_8pkho"]
 [ext_resource type="Script" path="res://src/fx/dying.gd" id="2_mvrew"]
+[ext_resource type="AudioStream" uid="uid://dnicqucb3e8ed" path="res://addons/FreeSFX/GameSFX/Animal Insects/Retro Owl 01.wav" id="3_quxr8"]
+[ext_resource type="Script" path="res://src/lib/pitch_mixer_audio_player.gd" id="4_xmcn7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fqkwj"]
 atlas = ExtResource("1_8pkho")
@@ -113,5 +115,13 @@ animations = [{
 sprite_frames = SubResource("SpriteFrames_0ytis")
 autoplay = "default"
 script = ExtResource("2_mvrew")
+
+[node name="CrySFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_quxr8")
+pitch_scale = 2.0
+script = ExtResource("4_xmcn7")
+min_pitch = 1.0
+max_pitch = 2.0
+auto_play_mixed = true
 
 [connection signal="animation_finished" from="." to="." method="_on_animation_finished"]

@@ -1,10 +1,13 @@
-[gd_scene load_steps=35 format=3 uid="uid://tt1hjgdlyxvb"]
+[gd_scene load_steps=38 format=3 uid="uid://tt1hjgdlyxvb"]
 
 [ext_resource type="PackedScene" uid="uid://c2l2ww2iyrrfh" path="res://src/characters/non_playables/enemy.tscn" id="1_65oal"]
 [ext_resource type="Script" path="res://src/characters/non_playables/enemies/torch_goblin.gd" id="2_ltebj"]
 [ext_resource type="Texture2D" uid="uid://d3dg4yds7b81v" path="res://addons/Tiny Swords/Factions/Goblins/Troops/Torch/Red/Torch_Red.png" id="3_g67wm"]
 [ext_resource type="Script" path="res://src/fx/spawners/loot.gd" id="3_lrjr2"]
 [ext_resource type="PackedScene" uid="uid://d18u5npqe51a8" path="res://src/fx/spawn/meat.tscn" id="4_n3yy0"]
+[ext_resource type="AudioStream" uid="uid://dgqmjhlv8hptx" path="res://addons/FreeSFX/GameSFX/Animal Insects/Retro Wolf B 02.wav" id="6_r7xna"]
+[ext_resource type="AudioStream" uid="uid://btscdulyjuyg5" path="res://addons/FreeSFX/GameSFX/Impact/Retro Impact LoFi 09.wav" id="7_eeln4"]
+[ext_resource type="Script" path="res://src/lib/pitch_mixer_audio_player.gd" id="8_kbo7x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vsx3e"]
 atlas = ExtResource("3_g67wm")
@@ -274,6 +277,20 @@ tracks/3/keys = {
 "method": &"next_state"
 }]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PitchMixerAudioPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"pitch_play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_kjn05"]
 resource_name = "hurt"
@@ -424,7 +441,19 @@ padding = 6.0
 max_value = 2
 fx = ExtResource("4_n3yy0")
 
+[node name="DeathFxSpawner" parent="." index="7"]
+cry = ExtResource("6_r7xna")
+cry_pitch_min = 0.6
+cry_pitch_max = 1.3
+
 [node name="AnimationPlayer" parent="StateMachine" index="0"]
 libraries = {
 "": SubResource("AnimationLibrary_nd4qg")
 }
+
+[node name="PitchMixerAudioPlayer" type="AudioStreamPlayer2D" parent="." index="12"]
+stream = ExtResource("7_eeln4")
+pitch_scale = 1.5
+script = ExtResource("8_kbo7x")
+min_pitch = 1.5
+max_pitch = 3.0

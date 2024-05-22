@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+@export var music_player: AudioStreamPlayer
 @onready var animation_player := $AnimationPlayer
 
 
@@ -31,6 +32,10 @@ func _set_display_visibility(from_device: int, value: bool) -> void:
 
 
 func fade_in(gold: int, waves: int, kills: int) -> void:
+	# TODO -> Make signal to it
+	music_player.stream = preload("res://addons/FreeSFX/GameSFX/Music/Negative/Retro Negative Melody 02 - space voice pad.wav")
+	music_player.play()
+	
 	%Gold.text = str(gold)
 	%Waves.text = str(waves - 1)
 	%Kills.text = str(kills)
@@ -39,6 +44,10 @@ func fade_in(gold: int, waves: int, kills: int) -> void:
 
 
 func fade_out() -> void:
+	# TODO -> Make signal to it
+	music_player.stream = preload("res://addons/FreeSFX/GameSFX/Music/Negative/Retro Negative Melody 02 - space voice pad - reverse.wav")
+	music_player.play()
+	
 	animation_player.play_backwards(&"fade_in")
 	await animation_player.animation_finished
 	

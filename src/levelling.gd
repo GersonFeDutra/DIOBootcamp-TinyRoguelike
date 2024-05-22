@@ -20,6 +20,8 @@ var interpolation_easing: float = 1.0
 @export var interpolation_strength: float = 5.0
 var _wave_changed: bool
 
+@export var next_wave_sfx: AudioStreamPlayer
+
 
 func _ready() -> void:
 	wave_progress_bar.value = wave_progress_bar.min_value
@@ -65,5 +67,11 @@ func _get_progress_update(from: Timer, delta: float) -> float:
 
 
 func _next_wave() -> void:
+	const WAVE_PITCH_STEP := .1
+	const WAVE_PITCH_MAX := 3.
 	current_wave += 1
+	next_wave_sfx.pitch_scale = fmod(
+				next_wave_sfx.pitch_scale + WAVE_PITCH_STEP,
+				WAVE_PITCH_MAX)
+	next_wave_sfx.play()
 	_wave_changed = true

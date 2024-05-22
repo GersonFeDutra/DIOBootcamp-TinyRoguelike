@@ -12,4 +12,7 @@ gold = 0
 collision_layer = 2
 health_max = 6
 
+[node name="DeathFxSpawner" parent="." index="2"]
+disable_cry = true
+
 [connection signal="killed" from="HitArea" to="." method="_on_killed"]

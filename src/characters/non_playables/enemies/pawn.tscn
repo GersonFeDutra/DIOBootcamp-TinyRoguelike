@@ -1,12 +1,11 @@
-[gd_scene load_steps=58 format=3 uid="uid://denn0gdxcl2ng"]
+[gd_scene load_steps=57 format=3 uid="uid://denn0gdxcl2ng"]
 
 [ext_resource type="PackedScene" uid="uid://c2l2ww2iyrrfh" path="res://src/characters/non_playables/enemy.tscn" id="1_28mpw"]
 [ext_resource type="Texture2D" uid="uid://dlrfs585dytlw" path="res://addons/Tiny Swords/Factions/Knights/Troops/Pawn/Red/Pawn_Red.png" id="2_5uk3o"]
 [ext_resource type="Script" path="res://src/characters/non_playables/enemies/pawn.gd" id="2_pdhvd"]
 [ext_resource type="Script" path="res://src/state_machine/state.gd" id="4_3nryn"]
-[ext_resource type="Script" path="res://src/fx/spawn/pop_spawner.gd" id="4_681nj"]
 [ext_resource type="Resource" uid="uid://jsyqquoysdip" path="res://assets/states/atk_axe.tres" id="5_asxld"]
-[ext_resource type="PackedScene" uid="uid://bhjnmvkkdrm0b" path="res://src/fx/spawn/pop/damage.tscn" id="5_fpnvi"]
+[ext_resource type="AudioStream" uid="uid://b18igpcrcis40" path="res://addons/FreeSFX/GameSFX/Impact/Retro Impact Punch 07.wav" id="6_s3fle"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23w5y"]
 atlas = ExtResource("2_5uk3o")
@@ -458,6 +457,20 @@ tracks/3/keys = {
 "update": 1,
 "values": [false, true]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_attack_sfx"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_llyxl"]
 resource_name = "atk"
@@ -512,6 +525,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_attack_sfx"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yv7o0"]
@@ -573,6 +600,8 @@ graph_offset = Vector2(-46.015, -14)
 [node name="Pawn" instance=ExtResource("1_28mpw")]
 script = ExtResource("2_pdhvd")
 weapon = 1
+attack_pitch_min = 1.0
+attack_pitch_max = 2.0
 
 [node name="AnimatedSprite2D" parent="." index="0"]
 sprite_frames = SubResource("SpriteFrames_son6n")
@@ -597,14 +626,7 @@ shape = SubResource("CapsuleShape2D_r500m")
 disabled = true
 debug_color = Color(0.998824, 0.0271898, 0, 0.42)
 
-[node name="DamageFxSpawner" parent="." index="5"]
-script = ExtResource("4_681nj")
-fx = ExtResource("5_fpnvi")
-
-[node name="DeathFxSpawner" parent="." index="6"]
-position = Vector2(0, 0)
-
-[node name="StateMachine" parent="." index="7"]
+[node name="StateMachine" parent="." index="9"]
 states = {
 0: SubResource("Resource_y3y22"),
 1: SubResource("Resource_7d5a8"),
@@ -622,5 +644,9 @@ libraries = {
 [node name="AnimationTree" parent="StateMachine" index="1"]
 tree_root = SubResource("AnimationNodeStateMachine_60cuu")
 
-[node name="ChaseBehavior" parent="." index="8"]
+[node name="ChaseBehavior" parent="." index="10"]
 delay = 0.5
+
+[node name="AttackSfx" type="AudioStreamPlayer2D" parent="." index="11"]
+stream = ExtResource("6_s3fle")
+pitch_scale = 2.0

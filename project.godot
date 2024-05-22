@@ -12,10 +12,10 @@ config_version=5
 
 config/name="Tiny Roguelike"
 config/description="A tiny swords adventure, inspired on the tiny swords asset pack from Pixel Frog, make as a project from the bootcamp of game development with Godot from the platforme DIO.me."
-run/main_scene="res://world.tscn"
+run/main_scene="res://src/hud/title_screen.tscn"
 config/features=PackedStringArray("4.2")
 config/icon="res://icon.png"
-run/ignore_damage=false
+run/ignore_damage=true
 run/time_scale=1.0
 run/first_play=true
 run/enable_screenshot=false
@@ -24,12 +24,17 @@ run/enable_screenshot=false
 
 ControllsGuide="*res://src/autoload/controlls_guide.tscn"
 DevMode="*res://src/autoload/DevMode.tscn"
+LocalizationManager="*res://addons/localization_editor/LocalizationManager.gd"
 
 [display]
 
 window/stretch/mode="canvas_items"
 mouse_cursor/custom_image="res://addons/Tiny Swords/UI/Pointers/cursor.tres"
 mouse_cursor/custom_image_hotspot=Vector2(2, 2)
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/localization_editor/plugin.cfg")
 
 [file_customization]
 
@@ -89,7 +94,7 @@ interact={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://localizations/locales.pt_BR.translation", "res://localizations/locales.en.translation")
+locale/translations=PackedStringArray("res://assets/localizations/locales.pt_BR.translation", "res://assets/localizations/locales.en.translation")
 
 [layer_names]
 
@@ -99,7 +104,7 @@ locale/translations=PackedStringArray("res://localizations/locales.pt_BR.transla
 
 [localization_editor]
 
-locales_path_to_file="res://localizations/locales.csv"
+locales_path_to_file="res://assets/localizations/locales.csv"
 
 [rendering]
 

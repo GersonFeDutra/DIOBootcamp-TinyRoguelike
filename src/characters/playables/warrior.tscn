@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://cfdp10a5kk106"]
+[gd_scene load_steps=91 format=3 uid="uid://cfdp10a5kk106"]
 
 [ext_resource type="PackedScene" uid="uid://v7sstw2wevwl" path="res://src/characters/playable.tscn" id="1_cam16"]
 [ext_resource type="Texture2D" uid="uid://dlc3rt0kpkwek" path="res://addons/Tiny Swords/Factions/Knights/Troops/Warrior/Purple/Warrior_Purple.png" id="2_d0c73"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://bnhpxs1mwgaeo" path="res://src/state_machine.tscn" id="5_eitsh"]
 [ext_resource type="PackedScene" uid="uid://da1i4csce3ukm" path="res://src/fx/aura.tscn" id="6_88nra"]
 [ext_resource type="Script" path="res://src/state_machine/state.gd" id="6_gudvj"]
+[ext_resource type="AudioStream" uid="uid://btscdulyjuyg5" path="res://addons/FreeSFX/GameSFX/Impact/Retro Impact LoFi 09.wav" id="7_dfbpl"]
+[ext_resource type="AudioStream" uid="uid://vpfy20yy13bd" path="res://addons/FreeSFX/GameSFX/FootStep/Retro FootStep 03.wav" id="7_xoofj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sqmbw"]
 atlas = ExtResource("2_d0c73")
@@ -533,6 +535,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [1.93357]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_attack_sfx"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_iapav"]
 resource_name = "atk_down_b"
@@ -596,6 +612,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [1.55817]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_attack_sfx"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_e1bp1"]
@@ -661,6 +691,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [-0.378275]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_attack_sfx"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_khohw"]
 resource_name = "atk_h_a"
@@ -724,6 +768,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.879517]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_attack_sfx"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_otb7y"]
@@ -789,6 +847,20 @@ tracks/4/keys = {
 "update": 0,
 "values": [-1.56456]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_attack_sfx"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_grhhj"]
 resource_name = "atk_up_b"
@@ -852,6 +924,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [-1.56456]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_attack_sfx"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_btrfi"]
@@ -1001,6 +1087,10 @@ graph_offset = Vector2(-64, -20)
 script = ExtResource("2_kaqtd")
 weight = 0.15
 can_attack = false
+footstep_sfx_pitch_min = 0.4
+footstep_sfx_pitch_max = 1.2
+slash_sfx_pitch_min = 1.6
+slash_sfx_pitch_max = 2.6
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
 position = Vector2(0, -32)
@@ -1012,12 +1102,16 @@ autoplay = "idle"
 position = Vector2(0, -28)
 shape = SubResource("CapsuleShape2D_2wmfk")
 
+[node name="HurtArea" parent="." index="2"]
+visible = false
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtArea" index="0"]
 position = Vector2(0, -28)
 shape = SubResource("CapsuleShape2D_2wmfk")
 debug_color = Color(0.997427, 0, 0.166181, 0.42)
 
 [node name="HitArea" parent="." index="3"]
+visible = false
 position = Vector2(0, -28)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitArea" index="0"]
@@ -1027,11 +1121,9 @@ debug_color = Color(0.685279, 0.293368, 1, 0.42)
 
 [node name="DamageFxSpawner" parent="." index="5"]
 position = Vector2(-16, -79)
-prefix = ""
 
 [node name="HealFxSpawner" parent="." index="6"]
 position = Vector2(16, -104)
-prefix = ""
 
 [node name="FxAnimationPlayer" type="AnimationPlayer" parent="." index="7"]
 libraries = {
@@ -1066,5 +1158,19 @@ modulate = Color(0.658824, 0.443137, 0.603922, 1)
 [node name="Timer" type="Timer" parent="AuraFx" index="3"]
 wait_time = 5.0
 autostart = true
+
+[node name="SlashSFX" type="AudioStreamPlayer2D" parent="." index="11"]
+stream = ExtResource("7_dfbpl")
+pitch_scale = 2.6
+attenuation = 0.366022
+panning_strength = 2.0
+
+[node name="FootstepSFX" type="AudioStreamPlayer2D" parent="." index="12"]
+stream = ExtResource("7_xoofj")
+
+[node name="FootstepInterval" type="Timer" parent="FootstepSFX" index="0"]
+unique_name_in_owner = true
+wait_time = 0.3
+one_shot = true
 
 [connection signal="timeout" from="AuraFx/Timer" to="." method="_on_aura_recharge"]

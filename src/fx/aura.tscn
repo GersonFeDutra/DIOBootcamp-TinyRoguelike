@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://da1i4csce3ukm"]
+[gd_scene load_steps=14 format=3 uid="uid://da1i4csce3ukm"]
 
 [ext_resource type="Texture2D" uid="uid://hldu22dmlplt" path="res://addons/kenney_particle-pack/PNG (Transparent)/circle_01.png" id="1_1n6gt"]
 [ext_resource type="Texture2D" uid="uid://cyc47a2bnidee" path="res://addons/kenney_particle-pack/PNG (Transparent)/flame_01.png" id="2_ar00y"]
@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://dm5oecvvxd65" path="res://addons/kenney_particle-pack/PNG (Transparent)/smoke_01.png" id="4_m3i76"]
 [ext_resource type="Texture2D" uid="uid://cvkus2pa2fhgv" path="res://addons/kenney_particle-pack/PNG (Transparent)/spark_02.png" id="5_0sr1e"]
 [ext_resource type="PackedScene" uid="uid://c2tsjgw3oyxlk" path="res://src/areas/hit.tscn" id="6_tjfs2"]
+[ext_resource type="AudioStream" uid="uid://bm5foxl4h01vn" path="res://addons/FreeSFX/GameSFX/Magic/Retro Magic Protection 25.wav" id="7_1htf8"]
+[ext_resource type="Script" path="res://src/lib/pitch_mixer_audio_player.gd" id="7_svxob"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_rsr2k"]
 blend_mode = 1
@@ -259,6 +261,20 @@ tracks/9/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("PitchMixerAudioPlayer")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"pitch_play"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8xp2m"]
 _data = {
@@ -302,6 +318,13 @@ texture = ExtResource("5_0sr1e")
 visible = false
 shape = SubResource("CircleShape2D_4uqh5")
 disabled = true
+
+[node name="PitchMixerAudioPlayer" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_1htf8")
+pitch_scale = 1.2
+script = ExtResource("7_svxob")
+min_pitch = 0.7
+max_pitch = 1.2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

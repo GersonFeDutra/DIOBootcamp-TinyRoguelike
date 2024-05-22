@@ -1,4 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhjnmvkkdrm0b"]
+[gd_scene load_steps=9 format=3 uid="uid://bhjnmvkkdrm0b"]
+
+[ext_resource type="AudioStream" uid="uid://dqy51pavx6wx8" path="res://addons/FreeSFX/GameSFX/Impact/Retro Impact Punch Hurt 01.wav" id="1_kki2g"]
 
 [sub_resource type="SystemFont" id="SystemFont_e5myo"]
 font_names = PackedStringArray("Monospace")
@@ -138,3 +140,7 @@ libraries = {
 }
 autoplay = "pop"
 speed_scale = 1.5
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_kki2g")
+autoplay = true

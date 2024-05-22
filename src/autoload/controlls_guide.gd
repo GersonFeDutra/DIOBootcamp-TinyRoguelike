@@ -9,7 +9,8 @@ var faded_keys: int
 var is_finished: bool
 
 
-func _ready() -> void:
+func start() -> void:
+	await get_tree().process_frame
 	setup()
 	Input.joy_connection_changed.connect(update_joypad_display)
 	update_connected_joypads_display()

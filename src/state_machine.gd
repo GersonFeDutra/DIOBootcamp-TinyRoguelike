@@ -17,6 +17,7 @@ extends Node
 	set(value):
 		current_state = value
 		update_configuration_warnings()
+
 var _next: State
 var _next_direction: Vector2
 var is_animation_finished: bool
