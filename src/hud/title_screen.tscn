@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://n73ltbs6wnqm"]
+[gd_scene load_steps=51 format=3 uid="uid://n73ltbs6wnqm"]
 
 [ext_resource type="Texture2D" uid="uid://shlxdgj2icex" path="res://addons/Tiny Swords/UI/Ribbons/Ribbon_Yellow_3Slides.png" id="1_c2p2f"]
 [ext_resource type="Script" path="res://src/hud/title_screen.gd" id="1_r36wr"]
@@ -23,6 +23,7 @@
 [ext_resource type="Texture2D" uid="uid://cpeufteqr3tis" path="res://addons/Tiny Swords/Deco/07.png" id="19_t451k"]
 [ext_resource type="Texture2D" uid="uid://cepi1tdvmksvj" path="res://addons/Tiny Swords/Deco/08.png" id="20_c1mq7"]
 [ext_resource type="Texture2D" uid="uid://cxfihfyv14y64" path="res://addons/Tiny Swords/Deco/09.png" id="21_hpu1e"]
+[ext_resource type="FontFile" uid="uid://nhqctm7q4an1" path="res://assets/fonts/cardinal/Cardinal.ttf" id="23_0i3u0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wrta1"]
 texture = ExtResource("3_6lldq")
@@ -269,30 +270,9 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 region_rect = Rect2(0, 0, 192, 64)
 
-[sub_resource type="GDScript" id="GDScript_lwc6u"]
-script/source = "extends Panel
-
-
-func _ready() -> void:
-	custom_minimum_size = $Label.size * $Label.scale
-"
-
-[sub_resource type="SystemFont" id="SystemFont_cic3w"]
-font_names = PackedStringArray("Serif")
-
-[sub_resource type="SystemFont" id="SystemFont_bxnir"]
-fallbacks = Array[Font]([SubResource("SystemFont_cic3w")])
-font_names = PackedStringArray("Georgia")
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_gb1um"]
-fallbacks = Array[Font]([SubResource("SystemFont_bxnir")])
-font_names = PackedStringArray("Fantasy")
-subpixel_positioning = 0
-
 [sub_resource type="LabelSettings" id="LabelSettings_1wc78"]
-font = SubResource("SystemFont_gb1um")
-font_size = 60
+font = ExtResource("23_0i3u0")
+font_size = 54
 font_color = Color(0.0862745, 0.109804, 0.180392, 1)
 
 [sub_resource type="SystemFont" id="SystemFont_6ehy0"]
@@ -376,22 +356,21 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -190.0
 offset_top = -47.5
-offset_right = 190.0
+offset_right = 210.0
 offset_bottom = 47.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.5, 1.5)
 pivot_offset = Vector2(196, 43)
 theme_override_styles/panel = SubResource("StyleBoxTexture_o4igq")
-script = SubResource("GDScript_lwc6u")
 
 [node name="Label" type="Label" parent="VBoxContainer/Title/TitlePanel"]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -135.0
-offset_right = 135.0
+offset_left = -138.5
+offset_right = 138.5
 offset_bottom = 67.0
 grow_horizontal = 2
 pivot_offset = Vector2(112, 31)

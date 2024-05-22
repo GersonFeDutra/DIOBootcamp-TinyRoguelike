@@ -7,7 +7,7 @@ func _ready() -> void:
 	set_physics_process(not Engine.is_editor_hint())
 	
 	if not behavior.target:
-		var playables: Array[Node] = get_tree().get_nodes_in_group("playable")
+		var playables: Array[Node] = get_tree().get_nodes_in_group(&"playable")
 		playables.shuffle()
 		
 		if playables.is_empty():

@@ -1,9 +1,10 @@
-[gd_scene load_steps=36 format=3 uid="uid://dgnehkxpwul3n"]
+[gd_scene load_steps=34 format=3 uid="uid://dgnehkxpwul3n"]
 
 [ext_resource type="Script" path="res://src/hud/game_over.gd" id="1_nmn42"]
 [ext_resource type="Shader" path="res://assets/shaders/blur.gdshader" id="2_1jlqy"]
 [ext_resource type="Texture2D" uid="uid://dsky3qvj3vqtk" path="res://addons/Tiny Swords/UI/Ribbons/Ribbon_Red_3Slides.png" id="3_fobjr"]
 [ext_resource type="Texture2D" uid="uid://cxldo4ci3rfbn" path="res://addons/Tiny Swords/UI/Banners/Banner_Horizontal.png" id="4_058ab"]
+[ext_resource type="FontFile" uid="uid://nhqctm7q4an1" path="res://assets/fonts/cardinal/Cardinal.ttf" id="4_iv8gf"]
 [ext_resource type="Shader" path="res://assets/shaders/pixelate.gdshader" id="5_7mghc"]
 [ext_resource type="Texture2D" uid="uid://bdls2nlyipgfp" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Light/Esc_Key_Light.png" id="7_e6a7k"]
 [ext_resource type="Texture2D" uid="uid://buqn3nftu7mju" path="res://addons/Xelu_Free_Controller&Key_Prompts/Keyboard & Mouse/Light/Mouse_Simple_Key_Light.png" id="8_c3lej"]
@@ -30,22 +31,9 @@ axis_stretch_horizontal = 2
 axis_stretch_vertical = 2
 region_rect = Rect2(0, 0, 192, 64)
 
-[sub_resource type="SystemFont" id="SystemFont_cic3w"]
-font_names = PackedStringArray("Serif")
-
-[sub_resource type="SystemFont" id="SystemFont_bxnir"]
-fallbacks = Array[Font]([SubResource("SystemFont_cic3w")])
-font_names = PackedStringArray("Georgia")
-subpixel_positioning = 0
-
-[sub_resource type="SystemFont" id="SystemFont_aooi1"]
-fallbacks = Array[Font]([SubResource("SystemFont_bxnir")])
-font_names = PackedStringArray("Fantasy")
-subpixel_positioning = 0
-
 [sub_resource type="LabelSettings" id="LabelSettings_c1tpe"]
-font = SubResource("SystemFont_aooi1")
-font_size = 60
+font = ExtResource("4_iv8gf")
+font_size = 40
 font_color = Color(0.937255, 0.780392, 0.682353, 1)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ywtt8"]
